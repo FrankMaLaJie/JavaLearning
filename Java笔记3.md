@@ -14,7 +14,7 @@
 
 继承可以使得子类具有父类的**属性（成员变量）**和方法，还可以在子类中重新定义，追加属性和方法。
 
-![image-20200820210639258](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200820210639258.png)
+![image-20200820210639258](https://i.loli.net/2020/08/22/LSinIZ1yuE8Wfv9.png)
 
 
 
@@ -176,19 +176,19 @@ public class Zi extends Fu
 
 ### super内存图
 
-![image-20200820215428326](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200820215428326.png)
+![image-20200820215428326](https://i.loli.net/2020/08/22/zSWEmnqbcClsopA.png)
 
 调用无参构造方法，加载到栈内存。子类构造方法中第一行默认有语句：**super()** 。
 
 
 
-![image-20200820215712468](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200820215712468.png)
+![image-20200820215712468](https://i.loli.net/2020/08/22/i68hYQpOjl2cbDU.png)
 
 进入到父类后，堆内存有一个 **super** 空间用来存储父类的初始化数据，然后去访问父类的构造方法。
 
 
 
-![image-20200820215934387](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200820215934387.png)
+![image-20200820215934387](https://i.loli.net/2020/08/22/92JVof3k61mKxNb.png)
 
 通过调用者z（001）找到super，再通过super找到对应的值。
 

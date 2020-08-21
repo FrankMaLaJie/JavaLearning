@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: upload
+---
+
 # Java学习笔记2
 
 # 类和对象
@@ -21,7 +25,7 @@
 
 **对象是类的实体。**
 
-![image-20200817150339332](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817150339332.png)
+![image-20200817150339332](https://i.loli.net/2020/08/22/cJaGTgRHE8LKSez.png)
 
 
 
@@ -63,13 +67,13 @@ p.Call();
 
 成员变量的内存和数组的成员内存分配相似。
 
-![image-20200817152934308](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817152934308.png)
+![image-20200817152934308](https://i.loli.net/2020/08/22/jTU9vaRqKzSEuCN.png)
 
-![image-20200817153007893](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817153007893.png)
+![image-20200817153007893](https://i.loli.net/2020/08/22/jJAQ4HuyZOPTB7V.png)
 
 成员方法的调用，先把成员方法加载到栈内存。调用者 s 就是前面 new 出来的 s。
 
-![image-20200817153138772](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817153138772.png)
+![image-20200817153138772](https://i.loli.net/2020/08/22/gGUz7Ccq5ObmEes.png)
 
 当方法执行完毕后，方法就会从栈内存中消失。
 
@@ -79,11 +83,11 @@ p.Call();
 
 成员变量的值可以不同，成员方法可以多个对象**共用**。
 
-![image-20200817153546316](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817153546316.png)
+![image-20200817153546316](https://i.loli.net/2020/08/22/Pjr5lnTSm3a2dsE.png)
 
 s1和s2分别对应堆内存中001和002这两个块地址内容。
 
-![image-20200817154115432](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817154115432.png)
+![image-20200817154115432](https://i.loli.net/2020/08/22/iZWrcCyph5I1SwL.png)
 
 这次成员方法study()的调用者是s2。
 
@@ -93,15 +97,15 @@ s1和s2分别对应堆内存中001和002这两个块地址内容。
 
 数组的内存分配相似。
 
-![image-20200817154305511](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817154305511.png)
+![image-20200817154305511](https://i.loli.net/2020/08/22/5oyEkSwpW4C8ZYI.png)
 
 此时s1和s2的值相同，都指向堆内存中001这块地址内容。
 
-![image-20200817154512508](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817154512508.png)
+![image-20200817154512508](https://i.loli.net/2020/08/22/UBFlfT4nRqiLEvW.png)
 
 通过s2来修改内容，001对应的内容发生改变。
 
-![image-20200817154653109](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817154653109.png)
+![image-20200817154653109](https://i.loli.net/2020/08/22/g2y3hWaVHN5RrvZ.png)
 
 此时无论通过s1还是s2输出内容，都会输出被s2修改后的内容。
 
@@ -113,7 +117,7 @@ s1和s2分别对应堆内存中001和002这两个块地址内容。
 
 **局部变量**：**方法中**的变量（蓝色框）。
 
-![image-20200817154939224](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817154939224.png)
+![image-20200817154939224](https://i.loli.net/2020/08/22/sSxapZwXI1gMT45.png)
 
 **区别**
 
@@ -214,12 +218,12 @@ public class 类名
   - 方法的形参如果和成员变量同名，不带**this**修饰的变量指的是形参，而不是成员变量。
   - 方法的形参没有和成员变量同名，不带**this**修饰的变量指的是成员变量。
 
-![image-20200817162235346](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817162235346.png)
+![image-20200817162235346](https://i.loli.net/2020/08/22/uoCUOYSjt1A5wsP.png)
 
 - 使用**this**的目的就是解决局部变量隐藏成员变量的问题。
 - **this**代表所在类的对象引用，方法被哪个对象对用，**this**就代表哪个对象（方法的**调用者**）。
 
-![image-20200817162519586](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817162519586.png)
+![image-20200817162519586](https://i.loli.net/2020/08/22/s9paCyduh1Y3qxH.png)
 
 
 
@@ -266,7 +270,7 @@ public class 类名
 
   如图中s3和s4都通过地址004指向常量池中004所对应的内容。
 
-![image-20200817201307637](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200817201307637.png)
+![image-20200817201307637](https://i.loli.net/2020/08/22/1twnYXeKLvoFEgs.png)
 
 
 
@@ -311,7 +315,7 @@ public class 类名
 
 每次进行字符串拼接，都会构建一个新的String对象，耗时，浪费内存空间，且无法避免。
 
-![image-20200819144649361](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200819144649361.png)
+![image-20200819144649361](https://i.loli.net/2020/08/22/LukIjlCdBqsWa4g.png)
 
 StringBuilder是一个内容可变的字符串类，我们可以把它看成一个容器。
 
@@ -621,7 +625,7 @@ for(int i = 100; i < 1000; i++)
 - 第一个和最后一个元素交换；第二个和倒数第二个交换...
 - 循环遍历数组时，定义两个索引变量，判断条件是**开始索引小于等于结束索引**
 
-![image-20200816215214220](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200816215214220.png)
+![image-20200816215214220](https://i.loli.net/2020/08/22/YvRDzhCblgSfj49.png)
 
 
 
@@ -1000,7 +1004,7 @@ public class Student
 
 ### 主界面的代码编写
 
-![image-20200819211031546](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200819211031546.png)
+![image-20200819211031546](https://i.loli.net/2020/08/22/ix3N81LOwGDV7lA.png)
 
 **思路：**
 

@@ -13,7 +13,7 @@
 |         cls         |               清屏。               |
 |        exit         |        退出命令提示符窗口。        |
 
-![image-20200810154333902](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200810154333902.png)
+![image-20200810154333902](https://i.loli.net/2020/08/22/jHW9DRBVEuS8Lit.png)
 
 
 
@@ -142,7 +142,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 
 **自动类型转换**：把一个表示 *<u>数据范围小</u>* 的数值或者变量赋值给另一个表示 <u>*数据范围大*</u> 的变量。
 
-![image-20200810175942765](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200810175942765.png)
+![image-20200810175942765](https://i.loli.net/2020/08/22/F9hMvX1jRBePqaU.png)
 
 **强制类型转换**：把一个表示 *<u>数据范围大</u>* 的数值或者变量赋值给另一个表示 <u>*数据范围小*</u> 的变量。
 
@@ -376,11 +376,11 @@ int number = r.nextInt(10); //变量number，数字10可变，其他不能变。
 
 为了提高效率，对空间进行了不同区域的划分，因为每一片区域都有特定的处理数据方式和内存管理方式。
 
-![image-20200812171801822](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200812171801822.png)
+![image-20200812171801822](https://i.loli.net/2020/08/22/PDBT3AFZpNjY2LR.png)
 
 图中 **arr** 指向 **001** 这一片内存空间，**001** 赋值给了 **arr** 。
 
-![image-20200812172158905](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200812172158905.png)
+![image-20200812172158905](https://i.loli.net/2020/08/22/4b6QkSdxKLesGHE.png)
 
 **arr[0]** 中的 **0** 找到内存 **001** 中的 **0**，然后输出所对应的数值。
 
@@ -405,9 +405,9 @@ arr2[1] = 222;
 arr2[2] = 333;
 ```
 
-![image-20200813222826226](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200813222826226.png)
+![image-20200813222826226](https://i.loli.net/2020/08/22/I1cJlgVzh4RpHB5.png)
 
-![image-20200813223001860](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200813223001860.png)
+![image-20200813223001860](https://i.loli.net/2020/08/22/e92MvrF1tf7cysI.png)
 
 
 
@@ -546,7 +546,7 @@ public class MethodDemo02
 
 对于基本数据类型的参数，形式参数的改变，**不影响**实际参数的值。
 
-![image-20200813235951250](C:\Users\Frank\AppData\Roaming\Typora\typora-user-images\image-20200813235951250.png)
+![image-20200813235951250](https://i.loli.net/2020/08/22/C2EvQHUot37GuxM.png)
 
 ```java
 public static void main(String[] args){
@@ -575,6 +575,3 @@ public static void change(int[] arr){
     arr[0] = 200;
 }
 ```
-
-
-
