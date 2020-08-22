@@ -217,17 +217,157 @@ public class Zi extends Fu
 - Java中类只支持单继承，不支持多继承
 - Java中类支持多层继承（多重继承）
 
-![img](https://www.runoob.com/wp-content/uploads/2013/12/types_of_inheritance-1.png)
+![image-20200822231429086](https://i.loli.net/2020/08/22/nFimAVU7jlbdROD.png)
 
 
 
+# 包
+
+## 概述
+
+- 包就是Java中的文件夹，作用是对类进行分类管理
+
+### 定义格式
+
+- 格式：package 包名; （多级包用.分开）
+- 范例：package com.malajie （二级包，com是第一个文件夹，malajie是第二个文件夹）
 
 
 
+### 带包的Java类编译和执行
+
+- 手动建包：
+  - 按照以前的格式编译java文件	javac HelloWorld.java
+  - 手动建包	在X盘创建文件夹com，然后在文件夹com下创建文件夹malajie
+  - 把class文件放到包的最里面	把HelloWorld.class文件放到com下的malajie这个文件夹下
+  - 带包执行	java com.malajie.HelloWorld
+- 自动建包：javac -d . HelloWorld.java	java com.malajie.HelloWorld
 
 
 
+## 导包
 
+使用不同包下的类的时候，要写类的全部路径，写起来太麻烦了，为了简化带包的操作，Java提供了导包的功能
+
+### 导包的格式
+
+- 格式：import 包名;
+- 范例：import com.animals.Cat
+
+
+
+# 修饰符
+
+## 权限修饰符
+
+|            修饰符             | 同一个类中 | 同一个包中的<br />子类和无关类 | 不同包的子类 | 不同包的无关类 |
+| :---------------------------: | :--------: | :----------------------------: | :----------: | :------------: |
+|            private            |     ✔      |                                |              |                |
+| 默认（default前面没有修饰符） |     ✔      |               ✔                |              |                |
+|           protected           |     ✔      |               ✔                |      ✔       |                |
+|            public             |     ✔      |               ✔                |      ✔       |       ✔        |
+
+
+
+## 状态修饰符
+
+### final（最终态）
+
+final关键字是最终的意思，可以修饰成员方法，成员变量，类
+
+#### final修饰的特点
+
+- 修饰方法：表明该方法是**最终方法，不能被重写**
+- 修饰变量：表明该变量是**常量，不能被再次赋值**
+- 修饰类：表明该方法是**最终类，不能被继承**
+
+```java
+public final class Fu//不能被继承
+{
+    public final int age = 20;//不能被再次赋值
+    
+    public final void show()//不能被重写
+    {
+        System.out.println("123");
+    }
+}
+```
+
+#### final修饰局部变量
+
+- 变量是基本类型：final修饰指的是基本类型的**数据值**不能发生改变
+- 变量是引用类型：final修饰指的是引用类型的**地址值**不能发生改变，但是内容可以改变
+
+```java
+final int age = 20;//不能被再次赋值
+//age = 100;报错，因为age是一个常量
+
+final Student s = new Student();
+s.age =100;//可以修改
+//s = new Student();报错，因为s的地址值不能改变
+```
+
+
+
+### static（静态）
+
+static关键字是静态的意思，可以修饰成员方法，成员变量
+
+#### static修饰的特点
+
+- 被类的所有对象共享
+  - 这是我们判断是否使用static（静态）关键字的条件
+- 可以通过类名待用，也可以通过对象名来调用
+  - **推荐：使用类名来调用**
+
+```java
+public class Student
+{
+    public String name;
+    public int age;
+    public static String university;
+    
+    public void show()
+    {
+        System.out.println(name + age + university);
+    }
+}
+
+public class Test
+{
+    public static void main(String[] args)
+    {
+        Student.university = "纽卡斯尔大学";
+        
+        Student s1 = new Student();
+        s1.name = "迪丽热巴";
+        s1.age = 28;
+        s1.show();//输出：迪丽热巴28纽卡斯尔大学
+        
+        Student s2 = new Student();
+        s2.name = "马拉杰";
+        s2.age = "24";
+        s2.show();//输出：马拉杰24纽卡斯尔大学
+    }
+
+}
+```
+
+#### static的访问特点
+
+非静态的成员方法
+
+- 能访问静态的成员变量
+- 能访问非静态的成员变量
+- 能访问静态的成员方法
+- 能访问非静态的成员方法
+
+静态的成员方法
+
+- 能访问静态的成员变量
+- 能访问静态的成员方法
+
+**总结：静态成员方法只能访问静态成员**
 
 
 
