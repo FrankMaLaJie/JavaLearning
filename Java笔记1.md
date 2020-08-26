@@ -575,3 +575,451 @@ public static void change(int[] arr){
     arr[0] = 200;
 }
 ```
+
+
+
+# 类和对象
+
+## 类
+
+- 类是对显示生活中一类具有**共同属性**和**行为**的事物的抽象，确定对象将会拥有的属性和行为。
+- 类是**对象**的**数据类型**。
+- 类是具有相同属性和行为的一组对象的集合。
+- 类是Java的基本组成单位。
+
+## 对象
+
+- **属性**：对象具有的各种特征，每个对象的每个**属性**都有特定的值。
+  - 在类中通过**成员变量**来体现（类中方法外的变量）
+
+- **行为**：对象能够执行的操作。
+  - 在类中通过**成员方法**来体现（和前面的方法相比，去掉关键字**static**即可）
+
+**类是对象的抽象；**
+
+**对象是类的实体。**
+
+![image-20200817150339332](https://i.loli.net/2020/08/22/cJaGTgRHE8LKSez.png)
+
+
+
+（左边：类；右边：对象）
+
+
+
+## 对象的使用
+
+- 创建对象
+  - 格式：类名 对象名 = new 类名（）;
+
+```java
+Phone p = new Phone();
+```
+
+- 使用对象
+
+  - 使用成员变量：
+
+    格式：对象名.变量名
+
+  - 使用成员方法：
+
+    格式：对象名.方法名()
+
+```java
+p.brand;
+p.Call();
+```
+
+
+
+## 对象内存图
+
+### 单个对象
+
+对象刚刚new出来的时候，如果成员变没有初始化，系统就会给它们一个初始值。
+
+成员变量的内存和数组的成员内存分配相似。
+
+![image-20200817152934308](https://i.loli.net/2020/08/22/jTU9vaRqKzSEuCN.png)
+
+![image-20200817153007893](https://i.loli.net/2020/08/22/jJAQ4HuyZOPTB7V.png)
+
+成员方法的调用，先把成员方法加载到栈内存。调用者 s 就是前面 new 出来的 s。
+
+![image-20200817153138772](https://i.loli.net/2020/08/22/gGUz7Ccq5ObmEes.png)
+
+当方法执行完毕后，方法就会从栈内存中消失。
+
+
+
+### 多个对象（指向不同）
+
+成员变量的值可以不同，成员方法可以多个对象**共用**。
+
+![image-20200817153546316](https://i.loli.net/2020/08/22/Pjr5lnTSm3a2dsE.png)
+
+s1和s2分别对应堆内存中001和002这两个块地址内容。
+
+![image-20200817154115432](https://i.loli.net/2020/08/22/iZWrcCyph5I1SwL.png)
+
+这次成员方法study()的调用者是s2。
+
+
+
+### 多个对象（指向相同）
+
+数组的内存分配相似。
+
+![image-20200817154305511](https://i.loli.net/2020/08/22/5oyEkSwpW4C8ZYI.png)
+
+此时s1和s2的值相同，都指向堆内存中001这块地址内容。
+
+![image-20200817154512508](https://i.loli.net/2020/08/22/UBFlfT4nRqiLEvW.png)
+
+通过s2来修改内容，001对应的内容发生改变。
+
+![image-20200817154653109](https://i.loli.net/2020/08/22/g2y3hWaVHN5RrvZ.png)
+
+此时无论通过s1还是s2输出内容，都会输出被s2修改后的内容。
+
+
+
+## 成员变量和局部变量
+
+**成员变量**：**类方法外**的变量（红色框）。
+
+**局部变量**：**方法中**的变量（蓝色框）。
+
+![image-20200817154939224](https://i.loli.net/2020/08/22/sSxapZwXI1gMT45.png)
+
+**区别**
+
+|       区别       |             成员变量             |                           局部变量                           |
+| :--------------: | :------------------------------: | :----------------------------------------------------------: |
+|   类中位置不同   |             类方法外             |                  方法内或方法声明（形参）上                  |
+| 内存中的位置不同 |              堆内存              |                            栈内存                            |
+|   生命周期不同   |   随着对象的存在消失而存在消失   |            随着方法的调用而存在，调用完毕就会消失            |
+|   初始化值不同   | 因为在堆内存中，有默认的初始化值 | 因为在栈内存中，没有默认的初始化值，必须先定义，赋值才能使用 |
+
+
+
+## 封装
+
+
+
+面向对象的三大特征：封装、继承、多态！！！
+
+面向对象的三大特征：封装、继承、多态！！！
+
+面向对象的三大特征：封装、继承、多态！！！
+
+
+
+### 概述
+
+- 是面对对象编程语言对客观世界的模拟，客观世界里成员变量都是隐藏在对象内部，外界无法直接操作。
+
+**封装原则**
+
+- 将类的某些信息隐藏在类的内部，不允许外部程序直接访问，而是通过该类提供的方法来实现对隐藏信息的操作和访问。成员变量**private**，提供对应的getXxx()和setXxx(参数)方法。
+
+**封装好处**
+
+- 通过方法来控制成员变量的操作，提高了代码的**安全性**。
+- 把代码用方法进行封装，提高了代码的**复用性**。
+
+
+
+### 构造方法
+
+构造方法是一种特殊的方法，用于创建对象，主要是完成对象数据的初始化。
+
+```java
+public class 类名
+{
+    修饰符 类名（参数）
+    {
+        //构造方法内书写内容
+    }
+}
+```
+
+- 构造方法的创建
+  - 如果没有定义构造方法，系统将给出一个**默认**的**无参构造方法**。
+  - 如果定义了构造方法，系统将不再提供默认的构造方法。
+- 构造方法的重载
+  - 如果自定义了**带参构造方法**，还要使用**无参构造方法**，就必须再写一个**无参构造方法**。
+
+**推荐：无论是否使用，都手工书写无参构造方法。**
+
+
+
+### 标准类的制作
+
+1. 成员变量
+   - 使用**private**修饰
+2. 构造方法
+   - 提供一个**无参构造方法**
+   - 提供一个**带多参数的构造方法**
+3. 成员方法
+   - 提供每一个成员变量对应的**getXxx()**和**setXxx(参数)**方法。
+   - 提供一个显示对象信息的**show()**方法。
+4. 创建对象并且为其成员变量赋值的两种方法
+   - **无参构造方法**创建对象后直接用**setXxx(参数)**方法赋值
+   - **多参构造方法**直接创建带有**属性值**的对象
+
+
+
+
+
+### "private"关键字
+
+- 是一个权限修饰符。
+- 可以修饰成员（成员变量和成员方法）。
+- 作用时保护成员不被别的类使用，被**private**修饰的成员只能在本类中才能访问。
+
+针对**private**修饰的成员变量，如果需要被其他类使用，一般会提供相应的操作，如：
+
+- 提供”get变量名（）“方法，用于**获取**成员变量的值，方法用**public**修饰。
+- 提供”set变量名（参数）“方法，用于**设置**成员变量的值，方法用**public**修饰。
+
+
+
+### "this"关键字
+
+- this修饰的变量用于指代成员变量
+  - 方法的形参如果和成员变量同名，不带**this**修饰的变量指的是形参，而不是成员变量。
+  - 方法的形参没有和成员变量同名，不带**this**修饰的变量指的是成员变量。
+
+![image-20200817162235346](https://i.loli.net/2020/08/22/uoCUOYSjt1A5wsP.png)
+
+- 使用**this**的目的就是解决局部变量隐藏成员变量的问题。
+- **this**代表所在类的对象引用，方法被哪个对象对用，**this**就代表哪个对象（方法的**调用者**）。
+
+![image-20200817162519586](https://i.loli.net/2020/08/22/s9paCyduh1Y3qxH.png)
+
+
+
+
+
+## String类
+
+### 概述
+
+- String在java.lang包下，使用时不需要导包。
+
+- Java中所有的字符串文字都被实现为String类的实例，即Java中所有双引号字符串，都是String类的对象。
+
+
+
+### 特点
+
+- String不可变，它们的值在创建后不能被更改。
+- 虽然String的值是不可变的，但是它们可以被共享。
+- String效果上相当于字符数组（char[]），但是底层原理是字节数组（byte[]）。
+
+
+
+### 构造方法
+
+|          方法名           |                   说明                    |
+| :-----------------------: | :---------------------------------------: |
+|      public String()      |  创建一个空白字符串对象，不含有任何内容   |
+| public String(char[] chs) |   根据字符数组的内容，来创建字符串对象    |
+| public String(byte[] bys) |   根据字节数组的内容，来创建字符串对象    |
+|     String s = "abc"      | 直接赋值的方式创建字符串对象，内容是"abc" |
+
+**推荐使用直接赋值的方式创建String**
+
+
+
+### String对象的特点
+
+- 通过**new**创建的字符串对象，每一次**new**都会申请一个内存空间，虽然**内容相同**，但是**地址值不同**。
+
+  如图中s1和s2的**参考（ref）的地址（内容）相同**，但是他们本身的地址（002，003）不同。
+
+- 以直接赋值方式给出的字符串，只要序列相同（顺序和大小写），无论在程序中出现多少次，JVM都只会创建一个String对象，并且在字符串池中维护。
+
+  如图中s3和s4都通过地址004指向常量池中004所对应的内容。
+
+![image-20200817201307637](https://i.loli.net/2020/08/22/1twnYXeKLvoFEgs.png)
+
+
+
+### 字符串的比较
+
+使用 **==** 做比较
+
+- 基本类型：比较的是**数据值**是否相同
+- 引用类型：比较的是**地址值**是否相同
+
+字符串是**对象**，它比较内容是否相同是通过一个方法实现的：**equals()**。
+
+- public boolean equals(Object anObject)：将此字符串和指定对象进行比较，由于比较的是字符串对象，所以参数可以直接传递字符串对象。
+
+```java
+        char[] chs = {'a',  'b', 'c'};
+        String s1 = new String(chs);
+        String s2 = new String(chs);
+
+        String s3 = "abc";
+        String s4 = "abc";
+
+        //比较地址
+        System.out.println(s1 == s2);//false,通过new创建,不同地址值
+        System.out.println(s1 == s3);//false
+        System.out.println(s3 == s4);//true,通过赋值创建,地址值是指向常量池中的同一个地址
+        System.out.println("-----------------");
+
+        //比较内容
+        System.out.println(s1.equals(s2));//true
+        System.out.println(s1.equals(s3));//true
+        System.out.println(s3.equals(s4));//true
+```
+
+
+
+## StringBuilder
+
+### 概述
+
+当字符串拼接的时候，先创建**要添加的内容**，再进行拼接，然后再**申请一个新的空间**存放拼接完的内容。
+
+每次进行字符串拼接，都会构建一个新的String对象，耗时，浪费内存空间，且无法避免。
+
+![image-20200819144649361](https://i.loli.net/2020/08/22/LukIjlCdBqsWa4g.png)
+
+StringBuilder是一个内容可变的字符串类，我们可以把它看成一个容器。
+
+- String：内容不可变
+- StringBuilder：内容可变
+
+
+
+### 构造方法
+
+|              方法名              |                     说明                     |
+| :------------------------------: | :------------------------------------------: |
+|      public StringBuilder()      | 创建一个空白的可变字符串对象，不含有任何内容 |
+| public StringBuilder(String str) |     根据字符串内容，来创建可变字符串对象     |
+
+
+
+### 添加和返回方法
+
+|                方法名                 |              说明              |
+| :-----------------------------------: | :----------------------------: |
+| public StringBuilder append(任意类型) | 添加数据，并且返回对象**本身** |
+|    public StringBuilder reverse()     |       返回相反的字符序列       |
+
+```java
+StringBuilder sb = new StringBuilder();
+sb.append("1");
+sb.append("2");
+sb.append("3");
+System.out.println(sb);//输出为：123
+//链式编程
+sb.append("7").append("8").append("9");//因为append返回对象本身，所以可以继续调用append方法
+System.out.prinlin(sb);//输出为：123789
+```
+
+
+
+### StringBuilder和String的相互转化
+
+StringBuilder中的添加和反转方法十分方便，但是String不能直接调用，因为StringBuilder和String类型不同，所以需要进行类型的转化。
+
+- StringBuilder转String
+  - public String toString()：通过**toString()**就可以实现把StringBuilder转换为String
+- String转StringBuilder
+  - public StringBuilder(String str)  ：通过StringBuilder的构造方法**StringBuilder(String str)**
+
+```java
+//StringBuilder转String
+public static void main(String[] args)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("hello");
+    	//String s = sb;报错，错误写法
+        String s = sb.toString();
+    	System.out.println(s);
+    }
+
+//String转StringBuilder
+public static void main(String[] args)
+    {
+    	String s = "hello";
+        StringBuilder sb = new StringBuilder(s);
+    	System.out.println(sb);
+    }
+```
+
+
+
+# 集合
+
+## 概述
+
+### 特点
+
+提供一种储存空间可变的存储模型，存储的数据容量可以发生改变。
+
+**ArrayList<E>：**
+
+- 可调整大小的数组实现
+- <E>：是一种特殊的数据类型，泛型
+- 在所有出现<E>的地方都可以使用引用数据类型替换
+  - ArrayList<String>, ArrayList<Student>
+
+## ArrayList的构造方法和添加方法
+
+|                方法名                 |                  说明                  |
+| :-----------------------------------: | :------------------------------------: |
+|          public ArrayList()           |          创建一个空的集合对象          |
+|        public boolean add(E e)        |   将指定的元素追加到此集合的**末尾**   |
+| public void add(int index, E element) | 在此集合中的**指定位置**插入指定的元素 |
+
+```java
+    public static void main(String[] args)
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+        
+        //输出：[],arrayList里面没有元素时返回"[]"
+        System.out.println(arrayList);
+        
+        arrayList.add("frank");
+        arrayList.add("la");
+
+        //输出：true，因为add(E e)返回Boolean值表示是否添加成功
+        System.out.println(arrayList.add("jie"));
+        
+        //输出：[frank, la, jie]，"jie"添加到arrayList末尾
+        System.out.println(arrayList);
+        
+        //在索引1的位置添加"ma"
+        arrayList.add(1, "ma");
+
+        //输出：[frank, ma, la, jie]，后面的元素往后推了一位
+        System.out.println(arrayList);
+        
+        //不可以跳过索引添加元素，会造成索引越界
+        //arrayList.add(5, "hello");报错
+        
+    }
+```
+
+
+
+## ArrayList集合的常用方法
+
+|               方法名                |                    说明                    |
+| :---------------------------------: | :----------------------------------------: |
+| public **boolean remove**(Object o) |     删除指定元素，返回删除**是否成功**     |
+|   public **E remove**(int index)    |     删除指定元素，返回**被删除的元素**     |
+| public E set(int index, E element)  | 修改指定索引处的元素，返回**被修改的元素** |
+|       public E get(int index)       |            返回指定索引处的元素            |
+|          public int size()          |            返回集合中的元素个数            |
+
+
