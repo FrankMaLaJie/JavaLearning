@@ -979,7 +979,7 @@ public static void main(String[] args)
 
 
 
-## Collection
+## Collection（接口）
 
 ### 概述
 
@@ -1299,11 +1299,376 @@ HashSet集合添加一个元素的过程：
 
 ### TreeSet集合概述和特点
 
+- 元素有序：这里的顺序 **不是** 指存储和取出的顺序，而是按照一定的规则排序，具体排序方式取决于构造方法
+  - TreeSet()：根据元素的自然排序进行排序
+  - TreeSet(Comparator comparator)：根据指定的比较器进行排序
+- 没有带索引的方法，所以不能使用普通的for循环进行遍历
+- 由于是Set集合，所以不包含重复元素的集合
+
+#### 自然排序Comparable的使用
+
+- 用TreeSet集合存储自定义对象，无参构造方法使用的是 **自然排序** 对元素进行排序
+
+- 自然排序就是 **让元素所属的类实现Comparable接口**，**重写compareTo(T o)方法**
+
+- 重写方法时，要注意排序规则按照要求的主要条件和次要条件来写
+
+  ```java
+  public class Student implements Comparable<Student>{
+      @Override
+      public int compareTo(Student s){
+          //return 0;//认为是重复元素，不添加
+          //return 1;//按照升序排序
+          //return -1;//按照降序排序
+  
+          //升序 this 放在前面
+          //降序 this 放在后面
+          int num = this.age - s.age;//this → s2，s → s1；后面加入的和前一个加入的作比较
+          //如果年龄相同，则以名字的字母顺序进行排序
+          int num2 = num == 0 ? this.name.compareTo(s.name) : num;
+          return num2;
+      }
+  }
+  ```
+
+#### 比较器排序Comparator的使用
+
+- 用TreeSet集合存储自定义对象，带参构造方法使用的是 **比较器排序** 对元素进行排序的
+- 比较器排序，就是 **让集合构造方法接收Comparator的实现类对象**，重写compareTo(T o1, T o2)方法
+- 重写方法时，要注意排序规则按照要求的主要条件和次要条件来写
+
+```java
+        TreeSet<Student> ts = new TreeSet<>(new Comparator<>()
+        {
+            @Override
+            public int compare(Student s1, Student s2)
+            {
+                int num = s2.getSum() - s1.getSum();
+                int num2 = num==0?s2.getChinese()-s1.getChinese():num;
+                int num3 = num2 ==0?s1.getName().compareTo(s2.getName()):num2;
+                return num3;
+            }
+        });
+```
 
 
 
+## Map
+
+### 概述
+
+- Interface Map<K,V>
+  - K：键的类型
+  - V：值的类型
+- 将键映射到值的对象
+- 不包含重复的键
+- 每个键可以映射到最多一个值
 
 
+
+### 使用
+
+- 使用多态的方式创建Map集合的对象
+- 具体的实现类HashMap
+- 重写了toString()方法，输出形式：{K=V，K1=V1}
+- 添加元素的方法 put(k,v)
+  - 当k重复的时候，后加入的值会替代掉之前的值
+
+
+
+### Map集合的基本功能
+
+|               方法名                |             说明              |
+| :---------------------------------: | :---------------------------: |
+|        V put(K key, V value)        |           添加元素            |
+|        V remove(Object key)         | 根据键删除（键 - 值）对应元素 |
+|            void clear()             |         移除所有元素          |
+|   boolean containsKey(Object Key)   |  判断集合中是否包含指定的键   |
+| boolean containsValue(Object Value) |  判断集合中是否包含指定的值   |
+|          boolean isEmpty()          |       判断集合是否为空        |
+|             int size()              | 集合长度，（键 - 值）对应个数 |
+
+
+
+### Map集合的获取功能
+
+|               方法名               |               说明                |
+| :--------------------------------: | :-------------------------------: |
+|         V get(Object key)          |           根据键获取值            |
+|          Set<K> keySet()           |  获取所有键的集合（键是唯一的）   |
+|      Collections <V> Values()      |         获取所有值的集合          |
+| **Set<Map.Entry<K,V>> enteySet()** | **获取所有（键 - 值）对象的集合** |
+
+
+
+### Map集合的遍历
+
+因为存储的元素都是成对出现的，可以把Map看成是夫妻对的集合
+
+遍历思路1：
+
+- 把所有丈夫集中起来（获取所有键的集合）
+  - 用KeySet()实现
+- 遍历丈夫的集合，获取到每一个丈夫（遍历键的集合，获取到每一个键）
+  - 用增强for循环实现
+- 根据丈夫去找对应的妻子（根据键去找值）
+  - 用get(Object key)方法实现
+
+```java
+//创建map集合
+Map<String,Integer> map = new HashMap<>();
+
+//添加元素
+map.put("一二三",123);
+map.put("四五六",456);
+map.put("七八九",789);
+
+//获取所有键的集合，用KeySet()实现
+Set<String> keySet = map.keySet();
+
+//遍历键的集合，获取到每一个键，用增强for循环实现
+for (String key : keySet){
+    //根据键去找值，用get(Object key)方法实现
+    Integer value = map.get(key);
+    System.out.println(key + "," + value);
+}
+```
+
+
+
+遍历思路2：
+
+- 获取所有结婚证的集合（获取所有（键 - 值）对象的集合）
+
+  - Set<Map.Entry<K,V>> enteySet()：获取所有（键 - 值）对象的集合
+
+- 遍历结婚证的集合，得到每一个结婚证（遍历（键 - 值）对象的集合，得到每一个（键 - 值）对象）
+
+  - 增强for循环实现，得到每一个Map.Entey
+
+- 根据结婚证获取丈夫和妻子（根据（键 - 值）对象获取键和值）
+
+  - getKey()得到键；getValue()得到值
+
+  ```java
+  public static void main(String[] args)
+  {
+      Map<String, Integer> map = new HashMap<>();
+  
+      map.put("一二三", 123);
+      map.put("四五六", 456);
+      map.put("七八九", 789);
+      
+      //创建（键 - 值）对象的集合
+      Set<Map.Entry<String, Integer>> entrySet = map.entrySet();
+      
+      //Map.Entry<String, Integer>是个对象名
+      for (Map.Entry<String, Integer> me : entrySet)
+      {
+          System.out.println(me.getKey() + "," + me.getValue());
+      }
+  }
+  ```
+
+  
+
+## 泛型
+
+### 概述
+
+- 本质是参数化类型，也就是说所操作得数据类型被指定为一个参数
+- 参数化类型：将类型由原来的的具体的类型参数化，然后再使用/调用时传入具体的类型
+- 用在类、方法和接口中，分别被称为泛型类、泛型方法和泛型接口
+- 格式
+  - <类型>：指定一种类型的格式。这里的类型可以看成是形参
+  - <类型1，类型2>：指定多种类型的格式，用逗号隔开。这里的类型可以看成是形参
+  - 将来具体调用的时候给定的形式可以看成是实参，并且实参的类型只能是引用类型
+
+
+
+### 好处
+
+- 把运行期间的问题提前到了编译期间
+- 避免了强制类型转化
+
+
+
+### 泛型类
+
+- 格式：
+
+  - 范例中的 **"T"** 可以为任意标识，常见的 **"T"、"E"、"K"、"V"** 等形式的参数常用于表示泛型
+
+  ```java
+  修饰符 class 类名<类型>{
+      
+  }
+  
+  //范例
+  public class Generic<T>{
+      
+  }
+  
+  ```
+  ```java
+  public class Generic<T>
+  {
+      private T t;
+  
+      public T getT()
+      {
+          return t;
+      }
+  
+      public void setT(T t)
+      {
+          this.t = t;
+      }
+  }
+  
+  public class GenericDemo
+  {
+      public static void main(String[] args)
+      {
+          Generic<String> g1 = new Generic<>();
+          g1.setT("迪丽热巴");
+          System.out.println(g1.getT());
+          //
+          Generic<Integer> g2 = new Generic<>();
+          g2.setT(28);
+          System.out.println(g2.getT() + "岁");
+      }
+  }
+  ```
+
+
+
+### 泛型方法
+
+- 调用这个方法的时候，根据参数类型决定 T 是什么类型
+
+- 格式：
+
+  ```java
+  修饰符 <类型> 返回值类型 方法名(类型 变量名){
+      
+  }
+  //范例：
+  public <T> void show(T t){
+      
+  }
+  ```
+
+
+
+### 泛型接口
+
+- 用泛型类实现泛型接口，重写对应方法为泛型方法
+
+- 格式：
+
+  ```java
+  修饰符 interface 接口名<类型>{
+      
+  }
+  
+  //范例：
+  public interface Generic<T>{
+      
+  }
+  ```
+
+  
+
+## 类型通配符 "<?>"
+
+- 为了表示各种泛型List的父类，可以使用类型通配符
+  - 类型通配符：**" <?> "**
+  - List<?>：表示元素类型为止的List，它的元素可以匹配 **任何类型**
+  - 这种带通配符的List仅仅表示它是各种泛型List的父类，并 **不能** 把元素添加到其中
+
+- 如果不希望List<?>是任何泛型List的父类，而是 **某一类** 泛型List的父类，可以使用 **类型通配符的上限**
+  - 类型通配符上限：<? extends 类型>
+  - List<? extends Number>：表示的类型是 **Number或者其子类型**
+- 除了指定上限，还可以指定 **类型通配符的下限**
+  - 类型通配符下限：<? super 类型>
+  - List<? superNumber>：表示的类型是 **Number或者其父类型**
+
+```java
+List<?> list = new ArrayList<String>();
+
+//List<? extends Number> list1 = new ArrayList<Object>();报错，上限是Number
+List<? extends Number> list2 = new ArrayList<Number>();
+List<? extends Number> list3 = new ArrayList<Integer>();
+
+List<? super Number> list4 = new ArrayList<Object>();
+List<? super Number> list5 = new ArrayList<Number>();
+//List<? super Number> list6 = new ArrayList<Integer>();报错，下限是Number
+```
+
+
+
+## 可变参数
+
+- 可变参数，也就是说参数的 **个数** 可变，用作方法的形参出现，那么方法的参数个数就是可变的了
+
+- 这里的变量其实是一个 **数组**
+
+- 方法如果有多个参数，包含可变参数，**要把可变参数放在最后**
+
+- 格式：
+
+  - 格式中的 **"a"**，是装有所有参数的 **数组**
+  - 方法如果除了可变参数外，还包含多个参数，**要把可变参数放在最后**
+
+  ```java
+  修饰符 返回值类型 方法名(数据类型... 变量名){
+      
+  }
+  
+  //范例：
+  public static int sum(int b, int...a){
+      
+  }
+  ```
+
+
+
+### 可变参数的使用
+
+Arrays工具类中有一个静态方法：
+
+- public static <T> List<T> asList(T...a)：返回由指定数组支持的 **固定大小** 的列表
+- 返回的集合不能做增删操作，可以做修改操作
+
+List接口中有一个静态方法：
+
+- public static <E> List<T> of(E...elements)：返回一个包含任意数量元素的不可变列表
+- 返回的集合不能做增删改操作
+
+Set接口中有一个静态方法：
+
+- public static <E> Set<T> of(E...elements)：返回一个包含任意数量元素的不可变集合
+- 在给元素的时候，不能给重复元素
+- 返回的集合不能做增删操作，没有修改的方法
+
+
+
+## Collections（工具类）
+
+### 概述
+
+- 针对集合操作的工具类
+
+
+
+### 常用方法
+
+|                            方法名                            |                说明                |
+| :----------------------------------------------------------: | :--------------------------------: |
+| public static <T extends Comparable<? super T>> void sort(List<T> list) |       将指定的列表按升序排序       |
+|           public static void reverse(List<?> list)           |      反转指定列表中元素的顺序      |
+|           public static void shuffle(List<?> list)           | 使用默认的随机源随机排序指定的列表 |
 
 
 
@@ -1463,7 +1828,27 @@ HashSet集合添加一个元素的过程：
 
 
 
+现在最多可以弄成：我爸妈（新地址），啊茵，我+婷（旧地址，我做户主）
 
+- 办理分户需要 **本人** 到场，谁分户谁到场。
+- 要迁出的人迁出后，剩余的人中，新户主会收到一本新的户口本
+- 办理之前都需要先预约
+  - 关注公众号“莞家政务”-预约办事-长安镇-长安政务服务中心-长安公安分局
+  - 户政业务-其他户政业务-家庭分户-预约**（因结了婚的分户）**
+  - 户政业务-市内移居-居住迁移-预约**（父母出户）**
+  - 如果找不到业务预约，可以直接在最上面 **“预约业务名称”** 中输入对应业务进行查询
+- 结了婚的分户要带的材料：
+  1. 身份证，
+  2. 户口本，
+  3. 结婚证，
+  4. 有小朋友要迁的就带上小朋友的出世纸。
+  5. 二标四实’的地址证明，在乡府城建开的。
+- 父母居住迁移
+  1. 身份证，
+  2. 户口本，
+  3. 结婚证，
+  4. 二标四实’的地址证明，在乡府城建开的。
+  5. 另一个地址的土地证
 
 
 

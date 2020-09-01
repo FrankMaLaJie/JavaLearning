@@ -192,13 +192,11 @@ System.out.println(year + "年" + month + "月" + date + "日");
 ### throws（方法括号后）
 
 - 虽然可以通过try...catch...对异常进行处理，但是并不是所有情况我们都有权限进行异常处理，针对这种情况，Java提供了throws的处理方案
-
 - 格式：
 
   - throws 异常类名；
   - **注意：throws 这个格式时跟在方法的括号后面**
 - **注意：throw**
-  
 
 - **编译时异常必须要进行处理**，两种处理方案
   - try...catch...
