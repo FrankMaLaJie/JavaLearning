@@ -267,6 +267,8 @@ System.out.println(year + "年" + month + "月" + date + "日");
 - 文件和目录可以通过File封装成对象
 - 对于File来说，它封装的不是一个真正存在的文件，而仅仅是一个路径名。它可以存在，可以不存在，将来是要通过具体操作把这个路径的内容转换为具体存在的
 
+
+
 ### 构造方法
 
 |              方法名               |                            说明                            |
@@ -275,19 +277,413 @@ System.out.println(year + "年" + month + "月" + date + "日");
 | File(String parent, String child) |      从父路径名字符串和子路径名字符串创建新的File实例      |
 |  File(File parent, String child)  |       从父抽象路径名和子路径名字符串创建新的File实例       |
 
+```java
+public static void main(String[] args){
+    File f1 = new File("E:\\xxxx\\xxxx.exe");
+    
+    File f2 = new File("E:\\xxx", "xxx.exe");
+    
+    File f3 = new File("E:\\xxxx");
+    File f4 = new File(f3, "xxx.exe");
+    
+}
+```
 
 
 
+### 创建功能
+
+|             方法名             |                             说明                             |
+| :----------------------------: | :----------------------------------------------------------: |
+| public boolean createNewFile() | 当具有该名称的文件不存在时，创建一个由该抽象路径名命名的新空文件 |
+|     public boolean mkdir()     |                 创建由此抽象路径名命名的目录                 |
+|    public boolean mkdirs()     |  创建由此抽象路径名命名的目录，包括任何必须但不存在的父目录  |
+
+```java
+public static void main(String[] args){
+    File f1 = new File("E:\\xxxx\\xxxx.exe");
+    //如果文件不存在，就创建文件返回true
+    //如果文件存在，就不创建文件返回false
+    f1.createNewFile();
+    
+    File f2 = new File("E:\\xxx");
+    //如果目录不存在，就创建文件返回true
+    //如果目录存在，就不创建文件返回false
+    f2.mkdir();
+    
+    File f3 = new File("E:\\aaa\\bbb\\cccc");
+    //要创建多级目录，必须用 mkdirs()方法
+    f3.mkdirs();
+}
+```
 
 
 
+### 判断、获取和删除功能
+
+|             方法名              |                           说明                           |
+| :-----------------------------: | :------------------------------------------------------: |
+|  public boolean isDirectory()   |           测试此抽象路径名表示的File是否为目录           |
+|     public boolean isFile()     |           测试此抽象路径名表示的File是否为文件           |
+|     public boolean exists()     |            测试此抽象路径名表示的File是否存在            |
+| public String getAbsolutePath() |            返回此抽象路径名的绝对路径名字符串            |
+|     public String getPath()     |             将此抽象路径名转化为路径名字符串             |
+|     public String getName()     |         返回由此抽象路径名表示的文件或目录的名称         |
+|     public String[] list()      | 返回此抽象路径名表示的目录中的文件和目录的名称字符串数组 |
+|    public File[] listFiles()    |  返回此抽象路径名表示的目录中的文件和目录的File对象数组  |
+|     public boolean delete()     |            删除由此抽象路径名表示的文件或目录            |
+
+- 绝对路径：**完整的路径名**，不需要任何其他信息就可以定位它所在的文件
+  - 例如：E:\\\aaa\\\bbb\\\cccc.exe
+- 相对路径：必须使用取自其他路径名的信息进行解释
+  - 例如：aaa\\\bbb\\\cccc.exe
+- **删除目录时的注意事项：**
+  - 如果一个 **目录中有内容**，**不能直接删除**，应该先删除目录中的内容，最后删除目录
 
 
 
+## 递归
+
+### 概述
+
+- **方法** 定义中 **调用方法本身**
+
+- 把一个复杂的问题层层转化为一个 **和原问题相似的规模较小** 的问题求解
+- 递归策略只需 **少量的程序** 就可以描述出解题过程所需要的多次重复计算
+- 通过递归解决问题必须找到两个内容
+  - 递归出口：否则出现内存溢出
+  - 递归规则：和原问题相似的规模较小的问题
+
+```java
+public static int f(int n){
+    if(n == 1 || n == 2){
+        return 1;
+    }
+    else
+    {
+        return f(n - 1) + f(n - 2)
+    }
+}
+```
 
 
 
+### 内存图
 
+```java
+public static int factorial(int n){
+    if (n == 1){
+        return 1;
+    }
+    else
+    {
+        return n * factorial(n-1);
+    }
+}
+```
+
+
+
+- 进栈的过程
+
+![image-20200902163256662](https://i.loli.net/2020/09/02/wFfMT2roZL9Eq3O.png)
+
+![image-20200902163519824](https://i.loli.net/2020/09/02/QcH481e5jCkWOZL.png)
+
+一直调用同一个方法，直到调用到 **递归出口** 为止
+
+
+
+- 出栈的过程
+
+![image-20200902163853703](https://i.loli.net/2020/09/02/Y6p2xGc4s7jvw9d.png)
+
+
+
+**递归出口** 算完了，就反过来一直计算直到执行完所有方法
+
+
+
+### 递归遍历目录
+
+给定一个路径，通过递归完成遍历该目录下的所有内容
+
+思路：
+
+- 根据给定的路径创建File对象
+- 定义一个方法，用于获取给定目录下的所有内容，参数为刚刚创建的File对象
+- 获取给定的File目录下所有的文件或者目录的File数组
+- 遍历File数组，得到每一个File对象
+- 盘对File对象是否是目录
+  - 是：递归调用
+  - 否：获取绝对路径输出
+
+```java
+public static void traverseDir(File file)
+{
+    //获取给定的File目录下所有的文件或者目录的File数组
+    File[] listFiles = file.listFiles();
+
+    //遍历File数组，得到每一个File对象
+    //先判断File数组是否为null
+    if (listFiles != null)
+    {
+        //遍历File数组，获取每一个File对象
+        for (File f : listFiles)
+        {
+            //如果是目录，递归
+            if (f.isDirectory())
+            {
+                traverseDir(f);
+            }
+            //如果不是目录，输出
+            else
+            {
+                System.out.println(f.getAbsolutePath());
+            }
+        }
+    }
+}
+```
+
+
+
+## IO流
+
+### 概述
+
+- IO：输入/输入（Input / Output）
+- 流：是对数据传输的总称
+  - 数据在设备间的传说称为流
+  - 流的本质是数据传输
+- IO流就是用来处理设备间数据传输问题的
+  - 文件复制，文件上传，文件下载
+
+![image-20200902170017828](https://i.loli.net/2020/09/02/ibekjZDunyVE2tL.png)
+
+
+
+### 分类
+
+- 根据 **流向** 进行分类
+  - 输入流：读数据
+  - 输出流：写数据
+- 根据 **数据类型** 进行分类**（默认）**
+  - 字节流
+    - 字节输入流
+    - 字节输出流
+  - 字符流
+    - 字符输入流
+    - 字符输出流
+- 数据通过记事本打开，不是乱码，就是用字符流，否则使用字节流
+- **万能流：字节流**
+
+
+
+### 字节流
+
+字节流抽象类基类
+
+- InputStream：字节输入流的所有类的超类
+- OutputStream：字节输出流的所有类的超类
+- 子类名特点：子类名称都是以其父类名作为子类名的后缀
+
+#### 写数据
+
+- FileOutputStream：文件输出流用于将数据写入File
+  - FileOutputStream(String name)：创建文件输出流以指定的名称写入文件
+  - FileOutputStream(String name, boolean append)：创建文件输出流以指定的名称写入文件。如果第二个参数是 **true**，则字节将写入文件的末尾而不是开头
+- 写完数据后，换行要加换行符
+  - windows：\r\n
+  - linux：\n
+  - mac：\r
+- 使用字节输出流写数据的步骤：
+  - 创建字节流输出对象
+    - 调用系统功能创建了文件
+    - 创建字节输出流对象
+    - 让字节输出流对象指向文件
+  - 调用字节输出流对象的写数据方法
+  - **释放资源（非常重要）**
+    - **关闭此文件的输出流**
+    - **释放和此流相关的任何系统资源**
+
+```java
+public static void main(String[] args) throws IOException
+{
+    //创建字节输出流对象
+    FileOutputStream fos = new FileOutputStream("Java Pratical\\fos.txt");
+    /*
+            干了三件事情：
+            - 调用系统功能创建了文件
+            - 创建字节输出流对象
+            - 让字节输出流对象指向文件
+    */
+
+    //写进去的不是"95"，而是"95"对应的字符
+    fos.write(95);
+
+    //最后一定要释放资源
+    fos.close();
+}
+```
+
+
+
+#### 方法
+
+|                 方法名                 |                             说明                             |
+| :------------------------------------: | :----------------------------------------------------------: |
+|           void write(int b)            |     将指定的字节写入此文件输出流<br />一次写一个字节数据     |
+|          void write(byte[] b)          | 将b.length字节从指定的字节数组写入此文件输出流<br />一次写一个字节数组数据 |
+| void write(byte[] b, int off, int len) | 将len字节从指定的字节数组开始，从偏移量off开始写入此文件输出流<br />一次写一个字节数组的部分数据<br />从第off个索引开始，写len个数据 |
+
+
+
+#### 字节流写数据的异常处理
+
+- finally：在异常处理时，提供 **finally** 块来执行所有清楚操作，比如IO流中的释放资源
+
+  - 特点：被finally控制的语句一定会执行，除非JVM退出
+
+  ```java
+  try{
+      可能出现异常的代码;
+  }
+  catch(异常类名 变量名){
+      异常的处理代码;
+  }
+  finally{
+      执行所有清楚操作;
+  }
+  ```
+
+  
+
+#### 读数据
+
+##### 一次读一个字节的数据
+
+- FileIntputStream：从文件系统中的文件获取输入字节
+  - FileIntputStream(String name)：创建文件输出流以指定的名称写入文件
+- 使用字节输入流写数据的步骤：
+  - 创建字节流输入对象
+  - 调用字节输入流对象的读数据方法read()
+    - 第一次读，读取第一个字符；第二次读，读取第二个字符
+    - 当读取到末尾，没有数据可读的时候，返回 -1
+  - **释放资源（非常重要）**
+    - **关闭此文件的输入流**
+    - **释放和此流相关的任何系统资源**
+
+```java
+public static void main(String[] args) throws IOException
+{
+    //创建字节输出流对象
+    FileInputStream fis = new FileInputStream("G:\\Github Desktop\\JavaLearning\\Java Practical\\fos.txt");
+
+    int by;
+    /*
+        - fis.read()：读数据
+        - by = fis.read()：把读到的数据赋值给by
+        - by != -1：判断读取到的数据是否是-1
+     */
+    while ((by = fis.read()) != -1)
+    {
+        //把读取到的字节强制转换为字符
+        System.out.println((char) by);
+    }
+
+    //最后一定要释放资源
+    fis.close();
+}
+```
+
+
+
+##### 一次读一个字节数组的数据（可以用于复制图片）
+
+- 使用字节输入流写数据的步骤：
+  - 创建字节流输入对象()
+  - 创建字节数组
+  - 调用字节输入流对象的读数据方法read()
+    - 当读取到末尾，没有数据可读的时候，返回 -1
+  - **释放资源（非常重要）**
+    - **关闭此文件的输入流**
+    - **释放和此流相关的任何系统资源**
+
+```java
+public static void main(String[] args) throws IOException
+{
+    //创建字节输出流对象
+    FileInputStream fis = new FileInputStream("G:\\Github Desktop\\JavaLearning\\Java Practical\\fos.txt");//abcd
+
+    //创建字节数组
+    byte[] by = new byte[3];
+
+    //读取最多字节数组长度（by.length()）个字符
+    //此时by是空的，所以把文件中前三个字符的字节存入数组
+    int len = fis.read(by);
+    //返回实际读取到的个数
+    System.out.println(len);//3
+    //把从索引 0 到 len 的字节转换成字符串输出，
+    System.out.println(new String(by, 0, len));//abc
+
+    //此时，文件中只剩下d，所以拿d替换掉a，by里面最后存放了dbc
+    len = fis.read(by);
+    //返回实际读取到的个数
+    System.out.println(len);//1
+    System.out.println(new String(by, 0, len));//dbc
+
+    //优化方案
+    byte[] bytes = new byte[1024];
+    int length;
+    while ((length = fis.read(bytes)) != -1)
+    {
+        System.out.println(new String(bytes, 0, length));
+    }
+    
+    //最后一定要释放资源
+    fis.close();
+}
+```
+
+- 读取最多字节数组长度（by.length()）个字符
+- 把读到的字符字节存到创建的字节数组中，by
+- 在字节数组中，后一次读取到的数据，会覆盖前一次读取到的数据
+- 如果剩余的字符字节个数小于字节数组的长度
+  - 先把剩余的字符字节存入数组，覆盖前一次数据
+  - 后面的数据没有东西去覆盖，所以输出时依然是上一次的数据
+  - read(bytep[] b)，返回实际读取到的个数
+
+
+
+### 字节缓冲流
+
+#### 概述
+
+- BufferedOutputStream：该类实现缓冲输出流。
+  - 通过设置这样的输出流，应用程序可以向底层输出流写入字节，而不必为写入每个字节导致底层系统调用
+- BufferedInputStream：创建BufferedInputStream将创建一个内部缓冲区数组
+  - 当从流中读取或跳过字节时，内部缓冲区根据需要从所包含的输入流中重新填充，一次很多字节
+
+
+
+#### 构造方法
+
+- 字节缓冲输出流：BufferedOutputStream(OutputStream out)
+- 字节缓冲输入流：BufferedInputStream(InputStream in)
+- 字节缓冲流 **仅仅提供缓冲区**，而真正的读写数据还是得依靠基本的字节流对象进行操作
+
+
+
+### 字符流
+
+- 由于字节流操作中文不方便，所以Java提供字符流
+- 字符流 = 字节流 + 编码表
+- 用字节流复制文本时，文本中可以也有中文，因为最终底层操作会自动进行字节拼接
+- 汉字存储：
+  - GBK编码，占用2个字节
+  - UTF-8编码，占用3个字节
+  - 无论那一种编码，第一个字节都是 **负数**
 
 
 

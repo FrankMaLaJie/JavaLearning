@@ -1,4 +1,4 @@
-package com.company;
+package com.algorithm;
 
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,7 +16,48 @@ public class Main
 
     public static void main(String[] args)
     {
+        File file = new File("F:\\学习视频");
+        traverseDir(file);
+    }
 
+    //遍历目录
+    public static void traverseDir(File file)
+    {
+        //获取给定的File目录下所有的文件或者目录的File数组
+        File[] listFiles = file.listFiles();
+
+        //遍历File数组，得到每一个File对象
+        //先判断File数组是否为null
+        if (listFiles != null)
+        {
+            //遍历File数组，获取每一个File对象
+            for (File f : listFiles)
+            {
+                //如果是目录，递归
+                if (f.isDirectory())
+                {
+                    traverseDir(f);
+                }
+                //如果不是，输出
+                else
+                {
+                    System.out.println(f.getAbsolutePath());
+                }
+            }
+        }
+    }
+
+    //求阶乘
+    public static int factorial(int n)
+    {
+        if (n == 1)
+        {
+            return 1;
+        }
+        else
+        {
+            return n * factorial(n - 1);
+        }
     }
 
     public static void addStudent(ArrayList<Student> arrayList)

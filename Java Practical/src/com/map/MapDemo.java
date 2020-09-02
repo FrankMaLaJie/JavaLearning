@@ -1,6 +1,6 @@
 package com.map;
 
-import com.company.Student;
+import com.algorithm.Student;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package com.company;
+package com.algorithm;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;

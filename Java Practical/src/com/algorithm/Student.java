@@ -1,7 +1,5 @@
-package com.company;
+package com.algorithm;
 
-
-import java.util.Objects;
 
 public class Student
 {
