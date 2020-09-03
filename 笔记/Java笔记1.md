@@ -42,7 +42,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 - 最大值是 **127（2^7-1）**；
 - 默认值是 **0**；
 - byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类型的四分之一；
-- 例子：byte a = 100，byte b = -50。
+- 例子：`byte a = 100`，`byte b = -50`
 
 **short：**
 
@@ -51,7 +51,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 - 最大值是 **32767（2^15 - 1）**；
 - Short 数据类型也可以像 byte 那样节省空间。一个short变量是int型变量所占空间的二分之一；
 - 默认值是 **0**；
-- 例子：short s = 1000，short r = -20000。
+- 例子：`short s = 1000`，`short r = -20000`
 
 **int：**
 
@@ -60,7 +60,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 - 最大值是 **2,147,483,647（2^31 - 1）**；
 - 一般地整型变量默认为 int 类型；
 - 默认值是 **0** ；
-- 例子：int a = 100000, int b = -200000。
+- 例子：`int a = 100000`, `int b = -200000`
 
 **long：**
 
@@ -70,7 +70,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 - 这种类型主要使用在需要比较大整数的系统上；
 - 默认值是 **0L**；
 - 为了防止整数过大，**long**类型后面要加上**" L "**。
-- 例子： long a = 100000L，Long b = -200000L。
+- 例子： `long a = 100000L`，`Long b = -200000L`
   "L"理论上不分大小写，但是若写成"l"容易与数字"1"混淆，不容易分辩。所以最好大写。
 
 **float：**
@@ -79,7 +79,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 - float 在储存大型浮点数组的时候可节省内存空间；
 - 默认值是 **0.0f**；
 - 浮点数不能用来表示精确的值，如货币；
-- 例子：float f1 = 234.5f。
+- 例子：`float f1 = 234.5f`
 - 为了防止类型不兼容，**float**后面要加上**" F "**。
 
 **double：**
@@ -88,7 +88,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 - 浮点数的默认类型为double类型；
 - double类型同样不能表示精确的值，如货币；
 - 默认值是 **0.0d**；
-- 例子：double d1 = 123.4。
+- 例子：`double d1 = 123.4`
 
 **boolean：**
 
@@ -96,7 +96,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 - 只有两个取值：true 和 false；
 - 这种类型只作为一种标志来记录 true/false 情况；
 - 默认值是 **false**；
-- 例子：boolean one = true。
+- 例子：`boolean one = true`
 
 **char：**
 
@@ -104,7 +104,7 @@ System.out.println();//直接输入这个语句，起到换行的作用
 - 最小值是 **\u0000**（即为0）；
 - 最大值是 **\uffff**（即为65,535）；
 - char 数据类型可以储存任何字符；
-- 例子：char letter = 'A';。
+- 例子：`char letter = 'A';`
 
 ## 引用数据类型
 
@@ -431,7 +431,7 @@ System.out.println(arr[0]);//arr不再指向对应数组，无法访问，报错
 
 获取数组元素个数
 
-- 格式：数组名.length，例如：arr.length
+- 格式：`数组名.length`，例如：`arr.length`
 
 ```java
 int[] arr = {...};
@@ -610,7 +610,7 @@ public static void change(int[] arr){
 ## 对象的使用
 
 - 创建对象
-  - 格式：类名 对象名 = new 类名（）;
+  - 格式：`类名 对象名 = new 类名（）`;
 
 ```java
 Phone p = new Phone();
@@ -620,11 +620,11 @@ Phone p = new Phone();
 
   - 使用成员变量：
 
-    格式：对象名.变量名
+    格式：`对象名.变量名`
 
   - 使用成员方法：
 
-    格式：对象名.方法名()
+    格式：`对象名.方法名()`
 
 ```java
 p.brand;
@@ -722,7 +722,7 @@ s1和s2分别对应堆内存中001和002这两个块地址内容。
 
 **封装原则**
 
-- 将类的某些信息隐藏在类的内部，不允许外部程序直接访问，而是通过该类提供的方法来实现对隐藏信息的操作和访问。成员变量**private**，提供对应的getXxx()和setXxx(参数)方法。
+- 将类的某些信息隐藏在类的内部，不允许外部程序直接访问，而是通过该类提供的方法来实现对隐藏信息的操作和访问。成员变量**private**，提供对应的 `getXxx()` 和 `setXxx(参数)` 方法。
 
 **封装好处**
 
@@ -763,10 +763,10 @@ public class 类名
    - 提供一个**无参构造方法**
    - 提供一个**带多参数的构造方法**
 3. 成员方法
-   - 提供每一个成员变量对应的**getXxx()**和**setXxx(参数)**方法。
-   - 提供一个显示对象信息的**show()**方法。
+   - 提供每一个成员变量对应的**`getXxx()`**和**`setXxx(参数)`**方法。
+   - 提供一个显示对象信息的**`show()`**方法。
 4. 创建对象并且为其成员变量赋值的两种方法
-   - **无参构造方法**创建对象后直接用**setXxx(参数)**方法赋值
+   - **无参构造方法**创建对象后直接用**`setXxx(参数)`**方法赋值
    - **多参构造方法**直接创建带有**属性值**的对象
 
 
@@ -781,8 +781,8 @@ public class 类名
 
 针对**private**修饰的成员变量，如果需要被其他类使用，一般会提供相应的操作，如：
 
-- 提供”get变量名（）“方法，用于**获取**成员变量的值，方法用**public**修饰。
-- 提供”set变量名（参数）“方法，用于**设置**成员变量的值，方法用**public**修饰。
+- 提供`get变量名（）`方法，用于**获取**成员变量的值，方法用**public**修饰。
+- 提供`set变量名（参数）`方法，用于**设置**成员变量的值，方法用**public**修饰。
 
 
 
@@ -823,12 +823,12 @@ public class 类名
 
 ### 构造方法
 
-|          方法名           |                   说明                    |
-| :-----------------------: | :---------------------------------------: |
-|      public String()      |  创建一个空白字符串对象，不含有任何内容   |
-| public String(char[] chs) |   根据字符数组的内容，来创建字符串对象    |
-| public String(byte[] bys) |   根据字节数组的内容，来创建字符串对象    |
-|     String s = "abc"      | 直接赋值的方式创建字符串对象，内容是"abc" |
+|           方法名            |                   说明                    |
+| :-------------------------: | :---------------------------------------: |
+|      `public String()`      |  创建一个空白字符串对象，不含有任何内容   |
+| `public String(char[] chs)` |   根据字符数组的内容，来创建字符串对象    |
+| `public String(byte[] bys)` |   根据字节数组的内容，来创建字符串对象    |
+|     `String s = "abc"`      | 直接赋值的方式创建字符串对象，内容是"abc" |
 
 **推荐使用直接赋值的方式创建String**
 
@@ -855,7 +855,7 @@ public class 类名
 - 基本类型：比较的是**数据值**是否相同
 - 引用类型：比较的是**地址值**是否相同
 
-字符串是**对象**，它比较内容是否相同是通过一个方法实现的：**equals()**。
+字符串是**对象**，它比较内容是否相同是通过一个方法实现的：**`equals()`**。
 
 - public boolean equals(Object anObject)：将此字符串和指定对象进行比较，由于比较的是字符串对象，所以参数可以直接传递字符串对象。
 
@@ -881,6 +881,21 @@ public class 类名
 
 
 
+### 分割字符串
+
+- String类中由 `split(String regex)` 可以以指定的规则分割字符串返回字符串数组
+
+- `public String[] split(String regex)`
+
+  - 例如：字符串"boo:and:foo"使用以下表达式产生以下结果：
+
+    | Regex |         Result          |
+    | :---: | :---------------------: |
+    |  ：   | { "boo", "and", "foo" } |
+    |   o   |  { "b", "", ":and:f" }  |
+
+
+
 ## StringBuilder
 
 ### 概述
@@ -900,19 +915,19 @@ StringBuilder是一个内容可变的字符串类，我们可以把它看成一�
 
 ### 构造方法
 
-|              方法名              |                     说明                     |
-| :------------------------------: | :------------------------------------------: |
-|      public StringBuilder()      | 创建一个空白的可变字符串对象，不含有任何内容 |
-| public StringBuilder(String str) |     根据字符串内容，来创建可变字符串对象     |
+|               方法名               |                     说明                     |
+| :--------------------------------: | :------------------------------------------: |
+|      `public StringBuilder()`      | 创建一个空白的可变字符串对象，不含有任何内容 |
+| `public StringBuilder(String str)` |     根据字符串内容，来创建可变字符串对象     |
 
 
 
 ### 添加和返回方法
 
-|                方法名                 |              说明              |
-| :-----------------------------------: | :----------------------------: |
-| public StringBuilder append(任意类型) | 添加数据，并且返回对象**本身** |
-|    public StringBuilder reverse()     |       返回相反的字符序列       |
+|                 方法名                  |              说明              |
+| :-------------------------------------: | :----------------------------: |
+| `public StringBuilder append(任意类型)` | 添加数据，并且返回对象**本身** |
+|    `public StringBuilder reverse()`     |       返回相反的字符序列       |
 
 ```java
 StringBuilder sb = new StringBuilder();
@@ -932,9 +947,9 @@ System.out.prinlin(sb);//输出为：123789
 StringBuilder中的添加和反转方法十分方便，但是String不能直接调用，因为StringBuilder和String类型不同，所以需要进行类型的转化。
 
 - StringBuilder转String
-  - public String toString()：通过**toString()**就可以实现把StringBuilder转换为String
+  - `public String toString()`：通过**toString()**就可以实现把StringBuilder转换为String
 - String转StringBuilder
-  - public StringBuilder(String str)  ：通过StringBuilder的构造方法**StringBuilder(String str)**
+  - `public StringBuilder(String str) ` ：通过StringBuilder的构造方法**`StringBuilder(String str)`**
 
 ```java
 //StringBuilder转String
@@ -991,25 +1006,25 @@ public static void main(String[] args)
 
 ### Collection集合的常用方法
 
-|           方法名            |              说明              |
-| :-------------------------: | :----------------------------: |
-|      boolean add(E e)       |            添加元素            |
-|  boolean remove(Object o)   |      从集合中移除指定元素      |
-|        void clear()         |        清空集合中的元素        |
-| boolean contains(Object o ) |  判断集合中是否存在指定的元素  |
-|      boolean isEmpty()      |        判断集合是否为空        |
-|         int size()          | 集合的长度。即集合中元素的个数 |
+|            方法名             |              说明              |
+| :---------------------------: | :----------------------------: |
+|      `boolean add(E e)`       |            添加元素            |
+|  `boolean remove(Object o)`   |      从集合中移除指定元素      |
+|        `void clear()`         |        清空集合中的元素        |
+| `boolean contains(Object o )` |  判断集合中是否存在指定的元素  |
+|      `boolean isEmpty()`      |        判断集合是否为空        |
+|         `int size()`          | 集合的长度。即集合中元素的个数 |
 
 
 
 ### Collection集合的遍历
 
 - Iterator：迭代器，集合专用的遍历方式
-- Iterator<E> iterator()：返回此集合中元素的迭代器
-- 迭代器是通过集合的 iterator() 方法得到的，所以我们说它是依赖于集合而存在的
+- `Iterator<E> iterator()`：返回此集合中元素的迭代器
+- 迭代器是通过集合的 `iterator()` 方法得到的，所以我们说它是依赖于集合而存在的
 - 常用的方法：
-  - E next()：	返回迭代中的下一个元素
-  - boolean hasNext()：如果迭代具有更多元素，则返回true
+  - `E next()`：	返回迭代中的下一个元素
+  - `boolean hasNext()`：如果迭代具有更多元素，则返回true
 
 ```java
 Collection<String> c = new ArrayList<String>();//步骤1：创建集合对象
@@ -1056,12 +1071,12 @@ while(it.hasNext())//步骤3.2：通过迭代器对象的hasNext()方法判断�
 
 ### List集合特有的方法
 
-|             方法名             |                  说明                  |
-| :----------------------------: | :------------------------------------: |
-| void add(int index, E element) |   在此集合中的指定位置插入指定的元素   |
-|      E remove(int index)       | 删除指定索引处的元素，返回被删除的元素 |
-|  E set(int index, E element)   | 修改指定索引处的元素，返回被修改的元素 |
-|        E get(int index)        |          返回指定索引处的元素          |
+|              方法名              |                  说明                  |
+| :------------------------------: | :------------------------------------: |
+| `void add(int index, E element)` |   在此集合中的指定位置插入指定的元素   |
+|      `E remove(int index)`       | 删除指定索引处的元素，返回被删除的元素 |
+|  `E set(int index, E element)`   | 修改指定索引处的元素，返回被修改的元素 |
+|        `E get(int index)`        |          返回指定索引处的元素          |
 
 
 
@@ -1095,7 +1110,7 @@ while(it.hasNext())//步骤3.2：通过迭代器对象的hasNext()方法判断�
 
 ### ListIterator（列表迭代器）
 
-- 通过List集合的listIterator()方法得到的，List集合特有的迭代器
+- 通过List集合的 `listIterator()` 方法得到的，List集合特有的迭代器
 - 允许沿任一方向遍历列表
 - 可以在迭代期间修改列表
 - 获取列表中迭代器的当前位置
@@ -1104,13 +1119,13 @@ while(it.hasNext())//步骤3.2：通过迭代器对象的hasNext()方法判断�
 
 ### ListIterator常用方法
 
-|        方法名         |                             说明                             |
-| :-------------------: | :----------------------------------------------------------: |
-|       E next()        |                    返回迭代中的下一个元素                    |
-|   boolean hasNext()   |               如果迭代具有更多元素，则返回true               |
-|     E previous()      |                    返回列表中的上一个元素                    |
-| boolean hasPrevious() | 如果此迭代器在相反方向迭代，遍历列表时具有更多元素，则返回true |
-|   **void add(E e)**   |                   **将指定的元素插入列表**                   |
+|         方法名          |                             说明                             |
+| :---------------------: | :----------------------------------------------------------: |
+|       `E next()`        |                    返回迭代中的下一个元素                    |
+|   `boolean hasNext()`   |               如果迭代具有更多元素，则返回true               |
+|     `E previous()`      |                    返回列表中的上一个元素                    |
+| `boolean hasPrevious()` | 如果此迭代器在相反方向迭代，遍历列表时具有更多元素，则返回true |
+|   **`void add(E e)`**   |                   **将指定的元素插入列表**                   |
 
 ```java
 List<String> list = new ArrayList<String>();
@@ -1161,9 +1176,9 @@ while(it.hasNext())
 ## ArrayList和LinkedList
 
 - 可调整大小的数组实现
-- <E>：是一种特殊的数据类型，泛型
-- 在所有出现<E>的地方都可以使用引用数据类型替换
-  - ArrayList<String>, ArrayList<Student>
+- `<E>`：是一种特殊的数据类型，泛型
+- 在所有出现`<E>`的地方都可以使用引用数据类型替换
+  - `ArrayList<String>`, `ArrayList<Student>`
 
 
 
@@ -1178,11 +1193,11 @@ while(it.hasNext())
 
 ### ArrayList的构造方法和添加方法
 
-|                方法名                 |                  说明                  |
-| :-----------------------------------: | :------------------------------------: |
-|          public ArrayList()           |          创建一个空的集合对象          |
-|        public boolean add(E e)        |   将指定的元素追加到此集合的**末尾**   |
-| public void add(int index, E element) | 在此集合中的**指定位置**插入指定的元素 |
+|                 方法名                  |                  说明                  |
+| :-------------------------------------: | :------------------------------------: |
+|          `public ArrayList()`           |          创建一个空的集合对象          |
+|        `public boolean add(E e)`        |   将指定的元素追加到此集合的**末尾**   |
+| `public void add(int index, E element)` | 在此集合中的**指定位置**插入指定的元素 |
 
 ```java
     public static void main(String[] args)
@@ -1217,26 +1232,26 @@ while(it.hasNext())
 
 ### ArrayList集合的常用方法
 
-|               方法名                |                    说明                    |
-| :---------------------------------: | :----------------------------------------: |
-| public **boolean remove**(Object o) |     删除指定元素，返回删除**是否成功**     |
-|   public **E remove**(int index)    |     删除指定元素，返回**被删除的元素**     |
-| public E set(int index, E element)  | 修改指定索引处的元素，返回**被修改的元素** |
-|       public E get(int index)       |            返回指定索引处的元素            |
-|          public int size()          |            返回集合中的元素个数            |
+|                方法名                 |                    说明                    |
+| :-----------------------------------: | :----------------------------------------: |
+| `public **boolean remove**(Object o)` |     删除指定元素，返回删除**是否成功**     |
+|   `public **E remove**(int index)`    |     删除指定元素，返回**被删除的元素**     |
+| `public E set(int index, E element)`  | 修改指定索引处的元素，返回**被修改的元素** |
+|       `public E get(int index)`       |            返回指定索引处的元素            |
+|          `public int size()`          |            返回集合中的元素个数            |
 
 
 
 ### LinkedList集合特有的功能
 
-|          方法名           |               说明               |
-| :-----------------------: | :------------------------------: |
-| public void addFirst(E e) |    在该列表开头插入指定的元素    |
-| public void addLast(E e)  |  将指定的元素追加到此列表的末尾  |
-|    public E getFirst()    |       返回列表中第一个元素       |
-|    public E getLast()     |      返回列表中最后一个元素      |
-|  public E removeFirst()   |  从列表中删除并且返回第一个元素  |
-|   public E removeLast()   | 从列表中删除并且返回最后一个元素 |
+|           方法名            |               说明               |
+| :-------------------------: | :------------------------------: |
+| `public void addFirst(E e)` |    在该列表开头插入指定的元素    |
+| `public void addLast(E e)`  |  将指定的元素追加到此列表的末尾  |
+|    `public E getFirst()`    |       返回列表中第一个元素       |
+|    `public E getLast()`     |      返回列表中最后一个元素      |
+|  `public E removeFirst()`   |  从列表中删除并且返回第一个元素  |
+|   `public E removeLast()`   | 从列表中删除并且返回最后一个元素 |
 
 
 
@@ -1260,13 +1275,13 @@ while(it.hasNext())
 
 - JDK根据对象的 **地址** 或者 **字符串** 或者 **数字** 算出来的 **int** 类型的 **数值**
 - Object类中有一个方法可以获取 **对象的哈希值**
-  - public int hashCode()：返回对象的哈希码值
+  - `public int hashCode()`：返回对象的哈希码值
 
 #### 对象哈希值的特点
 
-- 同一个对象多次调用hashCode()方法返回的哈希值是相同的
+- 同一个对象多次调用`hashCode()`方法返回的哈希值是相同的
 - **默认情况下，**不同对象的哈希值是不同的
-  - 重写hashCode()方法，可以实现让不同对象的哈希值变成相同的
+  - 重写`hashCode()`方法，可以实现让不同对象的哈希值变成相同的
 
 
 
@@ -1284,8 +1299,8 @@ HashSet集合添加一个元素的过程：
 <img src="https://i.loli.net/2020/08/30/EzQOIeK7RqrwhyG.png" alt="image-20200830001917761" style="zoom:150%;" />
 
 - 要保证元素唯一性需要：
-  - **重写hashCode()方法**
-  - **重写equals()方法**
+  - **重写`hashCode()`方法**
+  - **重写`equals()`方法**
 
 
 
@@ -1300,8 +1315,8 @@ HashSet集合添加一个元素的过程：
 ### TreeSet集合概述和特点
 
 - 元素有序：这里的顺序 **不是** 指存储和取出的顺序，而是按照一定的规则排序，具体排序方式取决于构造方法
-  - TreeSet()：根据元素的自然排序进行排序
-  - TreeSet(Comparator comparator)：根据指定的比较器进行排序
+  - `TreeSet()`：根据元素的自然排序进行排序
+  - `TreeSet(Comparator comparator)`：根据指定的比较器进行排序
 - 没有带索引的方法，所以不能使用普通的for循环进行遍历
 - 由于是Set集合，所以不包含重复元素的集合
 
@@ -1334,7 +1349,7 @@ HashSet集合添加一个元素的过程：
 #### 比较器排序Comparator的使用
 
 - 用TreeSet集合存储自定义对象，带参构造方法使用的是 **比较器排序** 对元素进行排序的
-- 比较器排序，就是 **让集合构造方法接收Comparator的实现类对象**，重写compareTo(T o1, T o2)方法
+- 比较器排序，就是 **让集合构造方法接收Comparator的实现类对象**，重写`compareTo(T o1, T o2)`方法
 - 重写方法时，要注意排序规则按照要求的主要条件和次要条件来写
 
 ```java
@@ -1357,7 +1372,7 @@ HashSet集合添加一个元素的过程：
 
 ### 概述
 
-- Interface Map<K,V>
+- `Interface Map<K,V>`
   - K：键的类型
   - V：值的类型
 - 将键映射到值的对象
@@ -1370,34 +1385,34 @@ HashSet集合添加一个元素的过程：
 
 - 使用多态的方式创建Map集合的对象
 - 具体的实现类HashMap
-- 重写了toString()方法，输出形式：{K=V，K1=V1}
-- 添加元素的方法 put(k,v)
+- 重写了`toString()`方法，输出形式：{K=V，K1=V1}
+- 添加元素的方法 `put(k,v)`
   - 当k重复的时候，后加入的值会替代掉之前的值
 
 
 
 ### Map集合的基本功能
 
-|               方法名                |             说明              |
-| :---------------------------------: | :---------------------------: |
-|        V put(K key, V value)        |           添加元素            |
-|        V remove(Object key)         | 根据键删除（键 - 值）对应元素 |
-|            void clear()             |         移除所有元素          |
-|   boolean containsKey(Object Key)   |  判断集合中是否包含指定的键   |
-| boolean containsValue(Object Value) |  判断集合中是否包含指定的值   |
-|          boolean isEmpty()          |       判断集合是否为空        |
-|             int size()              | 集合长度，（键 - 值）对应个数 |
+|                方法名                 |             说明              |
+| :-----------------------------------: | :---------------------------: |
+|        `V put(K key, V value)`        |           添加元素            |
+|        `V remove(Object key)`         | 根据键删除（键 - 值）对应元素 |
+|            `void clear()`             |         移除所有元素          |
+|   `boolean containsKey(Object Key)`   |  判断集合中是否包含指定的键   |
+| `boolean containsValue(Object Value)` |  判断集合中是否包含指定的值   |
+|          `boolean isEmpty()`          |       判断集合是否为空        |
+|             `int size()`              | 集合长度，（键 - 值）对应个数 |
 
 
 
 ### Map集合的获取功能
 
-|               方法名               |               说明                |
-| :--------------------------------: | :-------------------------------: |
-|         V get(Object key)          |           根据键获取值            |
-|          Set<K> keySet()           |  获取所有键的集合（键是唯一的）   |
-|      Collections <V> Values()      |         获取所有值的集合          |
-| **Set<Map.Entry<K,V>> enteySet()** | **获取所有（键 - 值）对象的集合** |
+|                方法名                |               说明                |
+| :----------------------------------: | :-------------------------------: |
+|         `V get(Object key)`          |           根据键获取值            |
+|          `Set<K> keySet()`           |  获取所有键的集合（键是唯一的）   |
+|      `Collections <V> Values()`      |         获取所有值的集合          |
+| **`Set<Map.Entry<K,V>> enteySet()`** | **获取所有（键 - 值）对象的集合** |
 
 
 
@@ -1408,11 +1423,11 @@ HashSet集合添加一个元素的过程：
 遍历思路1：
 
 - 把所有丈夫集中起来（获取所有键的集合）
-  - 用KeySet()实现
+  - 用`KeySet()`实现
 - 遍历丈夫的集合，获取到每一个丈夫（遍历键的集合，获取到每一个键）
   - 用增强for循环实现
 - 根据丈夫去找对应的妻子（根据键去找值）
-  - 用get(Object key)方法实现
+  - 用`get(Object key)`方法实现
 
 ```java
 //创建map集合
@@ -1440,15 +1455,15 @@ for (String key : keySet){
 
 - 获取所有结婚证的集合（获取所有（键 - 值）对象的集合）
 
-  - Set<Map.Entry<K,V>> enteySet()：获取所有（键 - 值）对象的集合
+  - `Set<Map.Entry<K,V>> enteySet()`：获取所有（键 - 值）对象的集合
 
 - 遍历结婚证的集合，得到每一个结婚证（遍历（键 - 值）对象的集合，得到每一个（键 - 值）对象）
 
-  - 增强for循环实现，得到每一个Map.Entey
+  - 增强for循环实现，得到每一个`Map.Entey`
 
 - 根据结婚证获取丈夫和妻子（根据（键 - 值）对象获取键和值）
 
-  - getKey()得到键；getValue()得到值
+  - `getKey()`得到键；`getValue()`得到值
 
   ```java
   public static void main(String[] args)
@@ -1584,15 +1599,15 @@ for (String key : keySet){
 
 - 为了表示各种泛型List的父类，可以使用类型通配符
   - 类型通配符：**" <?> "**
-  - List<?>：表示元素类型为止的List，它的元素可以匹配 **任何类型**
+  - `List<?>`：表示元素类型为止的List，它的元素可以匹配 **任何类型**
   - 这种带通配符的List仅仅表示它是各种泛型List的父类，并 **不能** 把元素添加到其中
 
-- 如果不希望List<?>是任何泛型List的父类，而是 **某一类** 泛型List的父类，可以使用 **类型通配符的上限**
-  - 类型通配符上限：<? extends 类型>
-  - List<? extends Number>：表示的类型是 **Number或者其子类型**
+- 如果不希望`List<?>`是任何泛型List的父类，而是 **某一类** 泛型List的父类，可以使用 **类型通配符的上限**
+  - 类型通配符上限：`<? extends 类型>`
+  - `List<? extends Number>`：表示的类型是 **Number或者其子类型**
 - 除了指定上限，还可以指定 **类型通配符的下限**
-  - 类型通配符下限：<? super 类型>
-  - List<? superNumber>：表示的类型是 **Number或者其父类型**
+  - 类型通配符下限：`<? super 类型>`
+  - `List<? superNumber>`：表示的类型是 **Number或者其父类型**
 
 ```java
 List<?> list = new ArrayList<String>();
@@ -1638,17 +1653,17 @@ List<? super Number> list5 = new ArrayList<Number>();
 
 Arrays工具类中有一个静态方法：
 
-- public static <T> List<T> asList(T...a)：返回由指定数组支持的 **固定大小** 的列表
+- `public static <T> List<T> asList(T...a)`：返回由指定数组支持的 **固定大小** 的列表
 - 返回的集合不能做增删操作，可以做修改操作
 
 List接口中有一个静态方法：
 
-- public static <E> List<T> of(E...elements)：返回一个包含任意数量元素的不可变列表
+- `public static <E> List<T> of(E...elements)`：返回一个包含任意数量元素的不可变列表
 - 返回的集合不能做增删改操作
 
 Set接口中有一个静态方法：
 
-- public static <E> Set<T> of(E...elements)：返回一个包含任意数量元素的不可变集合
+- `public static <E> Set<T> of(E...elements)`：返回一个包含任意数量元素的不可变集合
 - 在给元素的时候，不能给重复元素
 - 返回的集合不能做增删操作，没有修改的方法
 
@@ -1666,9 +1681,9 @@ Set接口中有一个静态方法：
 
 |                            方法名                            |                说明                |
 | :----------------------------------------------------------: | :--------------------------------: |
-| public static <T extends Comparable<? super T>> void sort(List<T> list) |       将指定的列表按升序排序       |
-|           public static void reverse(List<?> list)           |      反转指定列表中元素的顺序      |
-|           public static void shuffle(List<?> list)           | 使用默认的随机源随机排序指定的列表 |
+| `public static <T extends Comparable<? super T>> void sort(List<T> list)` |       将指定的列表按升序排序       |
+|          `public static void reverse(List<?> list)`          |      反转指定列表中元素的顺序      |
+|          `public static void shuffle(List<?> list)`          | 使用默认的随机源随机排序指定的列表 |
 
 
 

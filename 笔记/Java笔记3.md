@@ -8,10 +8,10 @@
 
 Date代表了一个特定的时间，精确到毫秒
 
-|       构造方法名       |                             说明                             |
-| :--------------------: | :----------------------------------------------------------: |
-|     public Date()      | 分配一个Date对象，并初始化，以便它待变它被分配的时间，精确到毫秒 |
-| public Date(long date) | 分配一个Date对象，并初始化为表示自标准基准时间以来的指定毫秒数，<br />即1970年1月1日00:00:00 GMT |
+|        构造方法名        |                             说明                             |
+| :----------------------: | :----------------------------------------------------------: |
+|     `public Date()`      | 分配一个Date对象，并初始化，以便它待变它被分配的时间，精确到毫秒 |
+| `public Date(long date)` | 分配一个Date对象，并初始化为表示自标准基准时间以来的指定毫秒数，<br />即1970年1月1日00:00:00 GMT |
 
 ```java
 import java.util.Date;
@@ -29,10 +29,10 @@ System.out.println(d2);//输出：Thu Jan 01 09:00:00 CST 1970
 
 ### Date类的常用方法
 
-|             方法名             |                     说明                     |
-| :----------------------------: | :------------------------------------------: |
-|     public long getTime()      | 获取的是日期对象从标准基准时间到现在的毫秒值 |
-| public void setTime(long time) |            设置时间，给的是毫秒值            |
+|              方法名              |                     说明                     |
+| :------------------------------: | :------------------------------------------: |
+|     `public long getTime()`      | 获取的是日期对象从标准基准时间到现在的毫秒值 |
+| `public void setTime(long time)` |            设置时间，给的是毫秒值            |
 
 
 
@@ -52,19 +52,19 @@ System.out.println(d2);//输出：Thu Jan 01 09:00:00 CST 1970
 |  m   |     分     |
 |  s   |     秒     |
 
-|               构造方法名                |                          说明                          |
-| :-------------------------------------: | :----------------------------------------------------: |
-|        public SimpleDateFormat()        |    构造一个SimpleDateFormat，使用默认模式和日期格式    |
-| public SimpleDateFormat(String pattern) | 构造一个SimpleDateFormat使用给定的模式和默认的日期格式 |
+|                构造方法名                 |                          说明                          |
+| :---------------------------------------: | :----------------------------------------------------: |
+|        `public SimpleDateFormat()`        |    构造一个SimpleDateFormat，使用默认模式和日期格式    |
+| `public SimpleDateFormat(String pattern)` | 构造一个SimpleDateFormat使用给定的模式和默认的日期格式 |
 
 
 
 ### 格式化和解析日期
 
 - 格式化（从Date到String）
-  - public final String format(Date date)：将日期格式化成日期/时间字符串
+  - `public final String format(Date date)`：将日期格式化成日期/时间字符串
 - 解析（从String到Date）
-  - public Date parse(String source)：从给定字符串的开始解析文本以生成日期
+  - `public Date parse(String source)`：从给定字符串的开始解析文本以生成日期
 
 ```java
 //格式化（从Date到String）
@@ -89,8 +89,8 @@ System.out.println(date1);
 
 - 为某一时刻和一组日历字段之间的转换提供了一些方法，并为操作日历字段提供了一些方法
 - 本身是一个抽象类
-- 提供了一个类方法 **getInstance()** 用于获取Calendar对象，其日历字段已使用当前日期和时间初始化
-  - Calendar rightNow = Calenda.getInstance()；（多态的形式：通过子类创建对象）
+- 提供了一个类方法 **`getInstance()`** 用于获取Calendar对象，其日历字段已使用当前日期和时间初始化
+  - `Calendar rightNow = Calenda.getInstance()`；（多态的形式：通过子类创建对象）
 
 ```java
 Calendar c = Calendar.getInstance();
@@ -105,11 +105,11 @@ System.out.println(year + "年" + month + "月" + date + "日");
 
 ### 常用方法
 
-|                        方法名                        |                           说明                           |
-| :--------------------------------------------------: | :------------------------------------------------------: |
-|              public int get(int field)               |                   返回给定日历字段的值                   |
-|   public abstract void add(int field, int amount)    | 根据日历的规则，将指定的时间量添加或者减去给定的日历字段 |
-| public final void set(int year, int month, int date) |                   设置当前日历的年月日                   |
+|                         方法名                         |                           说明                           |
+| :----------------------------------------------------: | :------------------------------------------------------: |
+|              `public int get(int field)`               |                   返回给定日历字段的值                   |
+|   `public abstract void add(int field, int amount)`    | 根据日历的规则，将指定的时间量添加或者减去给定的日历字段 |
+| `public final void set(int year, int month, int date)` |                   设置当前日历的年月日                   |
 
 
 
@@ -141,8 +141,8 @@ System.out.println(year + "年" + month + "月" + date + "日");
 ## 异常处理
 
 - 如果程序出现了问题，我们需要自己处理，有两种方案：
-  1. try...catch...
-  2. throws
+  1. `try...catch...`
+  2. `throws`
 
 
 
@@ -169,11 +169,11 @@ System.out.println(year + "年" + month + "月" + date + "日");
 
 ### Throwable的成员方法
 
-|            方法名             |              说明               |
-| :---------------------------: | :-----------------------------: |
-|  public String getMessage()   | 返回此throwable的详细消息字符串 |
-|   public String toString()    |     返回此可抛出的简短描述      |
-| public void printStackTrace() |  把异常的错误信息输出在控制台   |
+|             方法名              |              说明               |
+| :-----------------------------: | :-----------------------------: |
+|  `public String getMessage()`   | 返回此throwable的详细消息字符串 |
+|   `public String toString()`    |     返回此可抛出的简短描述      |
+| `public void printStackTrace()` |  把异常的错误信息输出在控制台   |
 
 
 
@@ -194,7 +194,7 @@ System.out.println(year + "年" + month + "月" + date + "日");
 - 虽然可以通过try...catch...对异常进行处理，但是并不是所有情况我们都有权限进行异常处理，针对这种情况，Java提供了throws的处理方案
 - 格式：
 
-  - throws 异常类名；
+  - `throws 异常类名`；
   - **注意：throws 这个格式时跟在方法的括号后面**
 - **注意：throw**
 
@@ -271,11 +271,11 @@ System.out.println(year + "年" + month + "月" + date + "日");
 
 ### 构造方法
 
-|              方法名               |                            说明                            |
-| :-------------------------------: | :--------------------------------------------------------: |
-|       File(String pathname)       | 通过将给定的路径名字符串转换为抽象路径名来创建新的File实例 |
-| File(String parent, String child) |      从父路径名字符串和子路径名字符串创建新的File实例      |
-|  File(File parent, String child)  |       从父抽象路径名和子路径名字符串创建新的File实例       |
+|               方法名                |                            说明                            |
+| :---------------------------------: | :--------------------------------------------------------: |
+|       `File(String pathname)`       | 通过将给定的路径名字符串转换为抽象路径名来创建新的File实例 |
+| `File(String parent, String child)` |      从父路径名字符串和子路径名字符串创建新的File实例      |
+|  `File(File parent, String child)`  |       从父抽象路径名和子路径名字符串创建新的File实例       |
 
 ```java
 public static void main(String[] args){
@@ -293,11 +293,11 @@ public static void main(String[] args){
 
 ### 创建功能
 
-|             方法名             |                             说明                             |
-| :----------------------------: | :----------------------------------------------------------: |
-| public boolean createNewFile() | 当具有该名称的文件不存在时，创建一个由该抽象路径名命名的新空文件 |
-|     public boolean mkdir()     |                 创建由此抽象路径名命名的目录                 |
-|    public boolean mkdirs()     |  创建由此抽象路径名命名的目录，包括任何必须但不存在的父目录  |
+|              方法名              |                             说明                             |
+| :------------------------------: | :----------------------------------------------------------: |
+| `public boolean createNewFile()` | 当具有该名称的文件不存在时，创建一个由该抽象路径名命名的新空文件 |
+|     `public boolean mkdir()`     |                 创建由此抽象路径名命名的目录                 |
+|    `public boolean mkdirs()`     |  创建由此抽象路径名命名的目录，包括任何必须但不存在的父目录  |
 
 ```java
 public static void main(String[] args){
@@ -321,17 +321,17 @@ public static void main(String[] args){
 
 ### 判断、获取和删除功能
 
-|             方法名              |                           说明                           |
-| :-----------------------------: | :------------------------------------------------------: |
-|  public boolean isDirectory()   |           测试此抽象路径名表示的File是否为目录           |
-|     public boolean isFile()     |           测试此抽象路径名表示的File是否为文件           |
-|     public boolean exists()     |            测试此抽象路径名表示的File是否存在            |
-| public String getAbsolutePath() |            返回此抽象路径名的绝对路径名字符串            |
-|     public String getPath()     |             将此抽象路径名转化为路径名字符串             |
-|     public String getName()     |         返回由此抽象路径名表示的文件或目录的名称         |
-|     public String[] list()      | 返回此抽象路径名表示的目录中的文件和目录的名称字符串数组 |
-|    public File[] listFiles()    |  返回此抽象路径名表示的目录中的文件和目录的File对象数组  |
-|     public boolean delete()     |            删除由此抽象路径名表示的文件或目录            |
+|              方法名               |                           说明                           |
+| :-------------------------------: | :------------------------------------------------------: |
+|  `public boolean isDirectory()`   |           测试此抽象路径名表示的File是否为目录           |
+|     `public boolean isFile()`     |           测试此抽象路径名表示的File是否为文件           |
+|     `public boolean exists()`     |            测试此抽象路径名表示的File是否存在            |
+| `public String getAbsolutePath()` |            返回此抽象路径名的绝对路径名字符串            |
+|     `public String getPath()`     |             将此抽象路径名转化为路径名字符串             |
+|     `public String getName()`     |         返回由此抽象路径名表示的文件或目录的名称         |
+|     `public String[] list()`      | 返回此抽象路径名表示的目录中的文件和目录的名称字符串数组 |
+|    `public File[] listFiles()`    |  返回此抽象路径名表示的目录中的文件和目录的File对象数组  |
+|     `public boolean delete()`     |            删除由此抽象路径名表示的文件或目录            |
 
 - 绝对路径：**完整的路径名**，不需要任何其他信息就可以定位它所在的文件
   - 例如：E:\\\aaa\\\bbb\\\cccc.exe
@@ -484,15 +484,15 @@ public static void traverseDir(File file)
 
 字节流抽象类基类
 
-- InputStream：字节输入流的所有类的超类
-- OutputStream：字节输出流的所有类的超类
+- `InputStream`：字节输入流的所有类的超类
+- `OutputStream`：字节输出流的所有类的超类
 - 子类名特点：子类名称都是以其父类名作为子类名的后缀
 
 #### 写数据
 
-- FileOutputStream：文件输出流用于将数据写入File
-  - FileOutputStream(String name)：创建文件输出流以指定的名称写入文件
-  - FileOutputStream(String name, boolean append)：创建文件输出流以指定的名称写入文件。如果第二个参数是 **true**，则字节将写入文件的末尾而不是开头
+- `FileOutputStream`：文件输出流用于将数据写入File
+  - `FileOutputStream(String name)`：创建文件输出流以指定的名称写入文件
+  - `FileOutputStream(String name, boolean append)`：创建文件输出流以指定的名称写入文件。如果第二个参数是 **true**，则字节将写入文件的末尾而不是开头
 - 写完数据后，换行要加换行符
   - windows：\r\n
   - linux：\n
@@ -531,11 +531,11 @@ public static void main(String[] args) throws IOException
 
 #### 方法
 
-|                 方法名                 |                             说明                             |
-| :------------------------------------: | :----------------------------------------------------------: |
-|           void write(int b)            |     将指定的字节写入此文件输出流<br />一次写一个字节数据     |
-|          void write(byte[] b)          | 将b.length字节从指定的字节数组写入此文件输出流<br />一次写一个字节数组数据 |
-| void write(byte[] b, int off, int len) | 将len字节从指定的字节数组开始，从偏移量off开始写入此文件输出流<br />一次写一个字节数组的部分数据<br />从第off个索引开始，写len个数据 |
+|                  方法名                  |                             说明                             |
+| :--------------------------------------: | :----------------------------------------------------------: |
+|           `void write(int b)`            |     将指定的字节写入此文件输出流<br />一次写一个字节数据     |
+|          `void write(byte[] b)`          | 将b.length字节从指定的字节数组写入此文件输出流<br />一次写一个字节数组数据 |
+| `void write(byte[] b, int off, int len)` | 将len字节从指定的字节数组开始，从偏移量off开始写入此文件输出流<br />一次写一个字节数组的部分数据<br />从第off个索引开始，写len个数据 |
 
 
 
@@ -563,8 +563,8 @@ public static void main(String[] args) throws IOException
 
 ##### 一次读一个字节的数据
 
-- FileIntputStream：从文件系统中的文件获取输入字节
-  - FileIntputStream(String name)：创建文件输出流以指定的名称写入文件
+- `FileIntputStream`：从文件系统中的文件获取输入字节
+  - `FileIntputStream(String name)`：创建文件输出流以指定的名称写入文件
 - 使用字节输入流写数据的步骤：
   - 创建字节流输入对象
   - 调用字节输入流对象的读数据方法read()
@@ -646,13 +646,13 @@ public static void main(String[] args) throws IOException
 }
 ```
 
-- 读取最多字节数组长度（by.length()）个字符
+- 读取最多字节数组长度（`by.length()`）个字符
 - 把读到的字符字节存到创建的字节数组中，by
 - 在字节数组中，后一次读取到的数据，会覆盖前一次读取到的数据
 - 如果剩余的字符字节个数小于字节数组的长度
   - 先把剩余的字符字节存入数组，覆盖前一次数据
   - 后面的数据没有东西去覆盖，所以输出时依然是上一次的数据
-  - read(bytep[] b)，返回实际读取到的个数
+  - `read(bytep[] b)`，返回实际读取到的个数
 
 
 
@@ -660,17 +660,17 @@ public static void main(String[] args) throws IOException
 
 #### 概述
 
-- BufferedOutputStream：该类实现缓冲输出流。
+- `BufferedOutputStream`：该类实现缓冲输出流。
   - 通过设置这样的输出流，应用程序可以向底层输出流写入字节，而不必为写入每个字节导致底层系统调用
-- BufferedInputStream：创建BufferedInputStream将创建一个内部缓冲区数组
+- `BufferedInputStream`：创建`BufferedInputStream`将创建一个内部缓冲区数组
   - 当从流中读取或跳过字节时，内部缓冲区根据需要从所包含的输入流中重新填充，一次很多字节
 
 
 
 #### 构造方法
 
-- 字节缓冲输出流：BufferedOutputStream(OutputStream out)
-- 字节缓冲输入流：BufferedInputStream(InputStream in)
+- 字节缓冲输出流：`BufferedOutputStream(OutputStream out)`
+- 字节缓冲输入流：`BufferedInputStream(InputStream in)`
 - 字节缓冲流 **仅仅提供缓冲区**，而真正的读写数据还是得依靠基本的字节流对象进行操作
 
 
@@ -684,6 +684,198 @@ public static void main(String[] args) throws IOException
   - GBK编码，占用2个字节
   - UTF-8编码，占用3个字节
   - 无论那一种编码，第一个字节都是 **负数**
+
+
+
+#### 编码表
+
+- 计算机存储信息用 **二进制数** 表示
+- 屏幕上的英文、汉字等字符都是二进制数转化后的结果
+- 按照某种规则将字符存储到计算机中称为 **编码**
+- 将字符存储在计算机按照某种规则解析出来称为 **解码**
+- **采用什么规则编码，就要采用对应的规则解码，否则就会出现乱码**
+- 字符集：
+  - 一个系统支持的所有字符的集合，包括国家文字、标点符号、图形符号、数字等
+  - 要准确存储和识别各种字符集符号，就要进行字符编码，一套字符集至少有一套字符编码
+  - 常见的字符集有：ASCII、GBXXX、Unicode等
+
+
+
+##### ASCII
+
+- 美国信息交换标准代码
+- 基于拉丁字母的一套电脑编码系统，用于显示现在英语
+- 主要包括控制字符（回车键、退格等）和可显示字符（英文大小写字符、阿拉伯数字和西文字符）
+- 基本ASCII字符集用7位表示一个字符，共128字符
+- ASCII扩展字符集用8位表示一个字符，共256字符，方便欧洲常用字符
+- 一个系统支持的所有字符的集合，包括国家文字、标点符号、图形符号、数字等
+
+
+
+##### GBXXX
+
+- GB2312：简体中文码表
+  - 一个小于127的字符的意义和原来相同，但两个大于127的字符连在一起，就表示一个汉字，包含了了7000多个简体汉字
+  - 全角：数字符号，罗马希腊的字母、日文的假名也编进去了，ASCII原本的数字、标点、字母都重新编了两个字节长的编码
+  - 半角：原来在127号以下的那些就叫半角字符
+- **GBK**：最常用的中文码表
+  - 在GB2312标准基础上的扩展规范，使用了双字节编码方案，共收录了21003个汉字，完全兼容GB2312，同时支持繁体汉字以及日韩汉字等
+- GB18030：最新中文码表
+  - 收录汉字70244个，采用多字节编码，每个字可以由1个、2个或4个字节组成。支持中国国内少数民族的文字，同时支持繁体汉字以及日韩汉字等
+
+
+
+##### Unicode
+
+- Unicode：统一码，万国码
+  - 为了表达任意语言的任意字符而设计的，是业界的一种标准
+  - 最多使用4个字节的数字来表达每个字母、符号或者文字
+    - 有三种编码方案：**UTF-8**（最常用）、UTF-16和UTF32
+  - **UTF-8**：可以用来表示Unicode标准中任意字符，它是电子邮件、网页以及其他存储或传送文字的应用中。优先采用的编码。
+    - 互联网工程工作小组（IETF）要求所有互联网协议都必须支持UTF-8编码
+    - 它使用一至四个字节为每个字符编码
+    - 规则：
+      - 128个US-ASCII字符，只需要1个字节编码
+      - 拉丁文字符，需要2个字节编码
+      - 大部分常用字（包含中文），需要3个字节编码
+      - 其他极少使用的Unicode辅助字符，需要4个字节编码
+
+#### 字符流中的编码解码问题
+
+**采用什么规则编码，就要采用对应的规则解码，否则就会出现乱码**
+
+##### 编码
+
+- `byte[] getBytes()`：使用平台的默认字符集将该String编码为一系列字节，将结果存储到新的字节数组中
+- `byte[] getBytes(String charsetName)`：使用指定的字符集将该String编码为一系列字节，将结果存储到新的字节数组中
+
+
+
+##### 解码
+
+- `String(byte[] byte)`：使用平台的默认字符集解码指定的字节数组来构造新的String
+- `String(byte[] byte, String charsetName)`：使用指定的字符集解码指定的字节数组来构造新的String
+
+
+
+
+
+#### 字符流中的编码解码问题
+
+- 字符流抽象基类
+  - `Reader`：字符输入流的抽象类
+  - `Writer`：字符输出流的抽象类
+- 字符流中和编码解码问题相关的两个类
+  - `InputStreamReader`
+  - `OutputStreamWriter`
+- 复制文件可以直接用他们的直接子类
+  - `FileReader`
+  - `FileWriter`
+
+
+
+#### 字符流写数据的5种方式
+
+|                   方法名                    |                             说明                             |
+| :-----------------------------------------: | :----------------------------------------------------------: |
+|             `void write(int c)`             |                          写一个字符                          |
+|          `void write(char[] cbuf)`          |                       写入一个字符数组                       |
+| `void write(char[] cbuf, int off, int len)` |                   写入一个字符数组的一部分                   |
+|           `void write(String str)           |                        写入一个字符串                        |
+| `void write(String str, int off, int len)`  |                    写入一个字符串的一部分                    |
+|               `void flush()`                |                   刷新流，还可以继续写数据                   |
+|               `void close()`                | 关闭流，释放资源，但是在关闭之前会先刷新流。一点关闭就不能再写数据 |
+
+
+
+#### 字符流读数据的2种方式
+
+|          方法名          |          说明          |
+| :----------------------: | :--------------------: |
+|      `void read()`       |   一次读一个字符数据   |
+| `void read(char[] cbuf)` | 一次读一个字符数组数据 |
+
+
+
+### 字符缓冲流
+
+- `BufferedWriter`：将文本写入字符输出流，缓冲字符，以提供单个字符、数组和字符串的高效写入，
+  - 可以指定缓冲区的大小，或者接受默认大小
+  - 默认值足够大，可用于大多数用途
+- `BufferedReader`：从字符输入流读取文本，缓冲字符，以提供单个字符、数组和行的高效读取
+  - 可以指定缓冲区的大小，或者接受默认大小
+  - 默认值足够大，可用于大多数用途
+
+
+
+#### 构造方法
+
+- 字符缓冲输出流：`BufferedWriter(Writer out)`
+- 字符缓冲输入流：`BufferedReader(Reader in)`
+
+
+
+#### 特有功能
+
+- `BufferedWriter`：
+  - `void newLine()`：写一个行分隔符，行分隔符字符串由系统属性定义
+- `BufferedReader`：
+  - `public String readLine()`：读一行文字，结果包含行的内容的字符串，**不包含任何行终止符**，如果到达流的结尾，返回null
+  - 一行被认为是由换行符（'\ n'），回车符（'\ r'），回车符后紧跟换行符或到达文件结尾的任何一个终止（EOF）。 
+
+```java
+public static void main(String[] args) throws IOException
+{
+    //创建字符缓冲流对象
+    BufferedReader br = new BufferedReader(new FileReader("G:\\Github Desktop\\JavaLearning\\Java Practical\\fos.txt"));
+    BufferedWriter bw = new BufferedWriter(new FileWriter("G:\\Github Desktop\\JavaLearning\\Java Practical\\fos.txt"));
+    
+    //写10行，每行都是helloi
+    for(int i = 0; i < 10; i++)
+    {
+        //用BufferedWriter写数据标准三个步骤
+        bw.write("hello" + i);
+        bw.newLine();//换行
+        bw.flush();
+    }
+    
+    //用BufferedReader读数据标准格式
+    String line;
+    while ((line = br.readLine()) != null)
+    {
+        //System.out.print(line);//输出全部在同一行，因为readLine()不读换行符
+        System.out.println(line);
+    }
+    
+    //最后一定要释放资源
+    br.close();
+    bw.close();
+}
+```
+
+
+
+### IO流总结
+
+#### 字节流
+
+![image-20200903211710838](https://i.loli.net/2020/09/03/uUXdLD2WJQ71jhn.png)
+
+![image-20200903211813101](https://i.loli.net/2020/09/03/vRV4XiEtdIDc2Bm.png)
+
+#### 字符流
+
+![image-20200903211908713](https://i.loli.net/2020/09/03/OG3Hkhjby2CfU9I.png)
+
+![image-20200903212024743](https://i.loli.net/2020/09/03/j3Ksti8fFMBHyha.png)
+
+
+
+
+
+
+
+
 
 
 

@@ -58,4 +58,15 @@ public class Student
     {
         this.address = address;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Student{" +
+                "sid='" + sid + '\'' +
+                ", name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

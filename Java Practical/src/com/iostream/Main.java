@@ -1,13 +1,17 @@
 package com.iostream;
 
+import com.studentmanager.Student;
+import org.apache.commons.math3.analysis.function.Add;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Main
 {
     public static void main(String[] args) throws IOException
     {
-
-
+        fileToStudentArr();
     }
 
     public static void readByOne() throws IOException
@@ -104,7 +108,8 @@ public class Main
         fis.close();
     }
 
-    public static void method1() throws IOException{
+    public static void method1() throws IOException
+    {
         //F:\学习视频\爬虫\day01.mp4
         //F:\学习视频
 
@@ -113,7 +118,8 @@ public class Main
 
         int by;
 
-        while ((by = fis.read()) != -1){
+        while ((by = fis.read()) != -1)
+        {
             fos.write(by);
         }
 
@@ -122,19 +128,179 @@ public class Main
 
     }
 
-    public static void method2() throws IOException{
+    public static void method2() throws IOException
+    {
         FileInputStream fis = new FileInputStream("F:\\学习视频\\123\\day01.mp4");
         FileOutputStream fos = new FileOutputStream("F:\\学习视频");
 
         byte[] bytes = new byte[1024];
         int length;
 
-        while ((length = fis.read(bytes)) != -1){
+        while ((length = fis.read(bytes)) != -1)
+        {
             fos.write(bytes, 0, length);
         }
 
         fis.close();
         fos.close();
 
+    }
+
+    public static void stringArrToFile() throws IOException
+    {
+        //创建ArrayList集合
+        ArrayList<String> arr = new ArrayList<>();
+
+        //向集合中存储字符串元素
+        arr.add("ma");
+        arr.add("la");
+        arr.add("jie");
+
+        //创建字符缓冲输出流对象
+        BufferedWriter bw = new BufferedWriter(new FileWriter
+                ("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\字符串.txt")
+        );
+
+        //遍历集合，得到每一个字符串数据
+        for (String s : arr)
+        {
+            //调用字符缓冲输出流对象的方法写数据
+            bw.write(s);
+            bw.newLine();
+            bw.flush();
+        }
+
+        //释放资源
+        bw.close();
+    }
+
+    public static void fileToStringArr() throws IOException
+    {
+        BufferedReader br = new BufferedReader(new FileReader
+                ("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\字符串.txt"));
+
+        ArrayList<String> arr = new ArrayList<>();
+        String line;
+
+        while ((line = br.readLine()) != null)
+        {
+            arr.add(line);
+        }
+        ;
+
+        br.close();
+
+        for (String s : arr)
+        {
+            System.out.println(s);
+        }
+    }
+
+    public static void callName() throws IOException
+    {
+        BufferedReader br = new BufferedReader(new FileReader
+                ("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\字符串.txt")
+        );
+
+        ArrayList<String> arr = new ArrayList<>();
+
+        String line;
+        while ((line = br.readLine()) != null)
+        {
+            arr.add(line);
+        }
+
+        br.close();
+
+        Random random = new Random();
+
+        int index = random.nextInt(arr.size());
+
+        String name = arr.get(index);
+
+        System.out.println("幸运者是：" + name);
+    }
+
+    public static void studentArrToFile() throws IOException{
+
+        //创建ArrayList集合
+        ArrayList<Student> arr = new ArrayList<>();
+
+        //创建学生对象
+        Student s1 = new Student("001","malajie","24","Dongguan");
+        Student s2 = new Student("002","dilireba","28","Xinjiang");
+        Student s3 = new Student("003","pikachu","5","Nintendo");
+        Student s4 = new Student("004","link","100","Hyrule");
+        Student s5 = new Student("005","zelda","100","Hyrule");
+
+        //把学生对象添加集合中
+        arr.add(s1);
+        arr.add(s2);
+        arr.add(s3);
+        arr.add(s4);
+        arr.add(s5);
+
+        //创建字符缓冲输出流对象
+        BufferedWriter bw = new BufferedWriter
+                (new FileWriter("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\字符串.txt")
+                );
+
+        //遍历集合，得到每一个学生对象
+        for (Student s : arr){
+
+            StringBuilder sb = new StringBuilder();
+
+            //把学生对象的数据拼接成指定格式的字符串
+            sb.append(s.getSid()).append(", ").append(s.getName()).append(", ")
+                    .append(s.getAge()).append(", ").append(s.getAddress());
+
+            //调用字符缓冲输出流对象的方法写数据
+            bw.write(sb.toString());
+            bw.newLine();
+            bw.flush();
+        }
+
+        //释放资源
+        bw.close();
+    }
+
+    public static void fileToStudentArr() throws IOException{
+
+        //创建字符缓冲输入流对象
+        BufferedReader br = new BufferedReader(new FileReader
+                ("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\字符串.txt")
+        );
+
+        //创建ArrayList集合
+        ArrayList<Student> arr = new ArrayList<>();
+
+        //调用字符缓冲输入流对象的方法读数据
+        //001, malajie, 24, Dongguan
+        String line;
+        while ((line = br.readLine()) !=null){
+
+            //把读取到的字符串数据用split()进行分割，得到一个字符串数组
+            String[] str = line.split(", ");
+
+            //创建学生对象
+            Student s = new Student();
+
+            //把字符串数组中的每一个元素取出来，赋值给对应的成员变量
+            s.setSid(str[0]);
+            s.setName(str[1]);
+            s.setAge(str[2]);
+            s.setAddress(str[3]);
+
+            //把学生对象添加到集合
+            arr.add(s);
+        }
+
+        //释放资源
+        br.close();
+
+        //遍历集合
+        for(Student s :arr){
+            System.out.println(s);
+        }
     }
 }

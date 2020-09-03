@@ -254,7 +254,7 @@ public class Zi extends Fu
 ### 导包的格式
 
 - 格式：import 包名;
-- 范例：import com.animals.Cat
+- 范例：`import com.animals.Cat`
 
 
 
@@ -400,7 +400,7 @@ public class Test
 
 - 有继承/实现关系
 - 有方法重写
-- 有父（类/接口）引用指向（子/实现）类对象：动物 animal = new 猫();
+- 有父（类/接口）引用指向（子/实现）类对象：`动物 animal = new 猫()`;
 
 ```java
 public class Animal 
@@ -724,7 +724,7 @@ public class Cat implements Jumping
 
 - 成员变量
   - 只能是常量
-  - 默认修饰符：public static final（可以省略不写，直接定义变量）
+  - 默认修饰符：`public static final`（可以省略不写，直接定义变量）
 
 ```java
 public interface Inter{
@@ -754,7 +754,7 @@ public class InterImpl extends Object implements Inter{
 
 - 成员方法
   - 只能是抽象方法
-  - 默认修饰符：public abstract（可以省略不写，直接定义方法）
+  - 默认修饰符：`public abstract`（可以省略不写，直接定义方法）
 
 ```java
 public interface Inter{
@@ -1132,16 +1132,16 @@ public class InnerDemo
 - 没有构造方法
 - 调用的时候看类的成员是否都是 **静态** 的，如果是，通过类名就可以直接调用
 
-|                  常用方法名                  |               说明               |
-| :------------------------------------------: | :------------------------------: |
-|         public static int abs(int a)         |         返回参数的绝对值         |
-|     public static double ceil(double a)      |   返回大于或等于参数的最小整数   |
-|     public static double floor(double a)     |   返回小于或等于参数的最大整数   |
-|       public static int round(float a)       | 按照四舍五入返回最接近参数的int  |
-|     public static int max(int a, int b)      |     返回两个int值中的较大值      |
-|     public static int min(int a, int b)      |     返回两个int值中的较小值      |
-| public static double pow(double a, double b) |         返回a的b次幂的值         |
-|        public static double random()         | 返回值为double的正值，[0.0, 1.0) |
+|                   常用方法名                   |               说明               |
+| :--------------------------------------------: | :------------------------------: |
+|         `public static int abs(int a)`         |         返回参数的绝对值         |
+|     `public static double ceil(double a)`      |   返回大于或等于参数的最小整数   |
+|     `public static double floor(double a)`     |   返回小于或等于参数的最大整数   |
+|       `public static int round(float a)`       | 按照四舍五入返回最接近参数的int  |
+|     `public static int max(int a, int b)`      |     返回两个int值中的较大值      |
+|     `public static int min(int a, int b)`      |     返回两个int值中的较小值      |
+| `public static double pow(double a, double b)` |         返回a的b次幂的值         |
+|        `public static double random()`         | 返回值为double的正值，[0.0, 1.0) |
 
 
 
@@ -1149,10 +1149,10 @@ public class InnerDemo
 
 - 包含几个有用的类字段和方法，不能被实例化
 
-|               常用方法名               |                    说明                    |
-| :------------------------------------: | :----------------------------------------: |
-|  public static void exit(int status)   | 终止当前运行的Java虚拟机，非零表示异常终止 |
-| public static long currentTimeMillis() |        返回当前时间（以毫秒为单位）        |
+|                常用方法名                |                    说明                    |
+| :--------------------------------------: | :----------------------------------------: |
+|  `public static void exit(int status)`   | 终止当前运行的Java虚拟机，非零表示异常终止 |
+| `public static long currentTimeMillis()` |        返回当前时间（以毫秒为单位）        |
 
 
 
@@ -1160,13 +1160,13 @@ public class InnerDemo
 
 - 类层次结构的根，每个类都可以将Object作为超类（super）
 - 所有类都直接或者间接继承自Object类
-- 构造方法：public Object()
+- 构造方法：`public Object()`
 - 子类的构造方法默认访问的是父类的无参构造方法，因为它们的顶级父类（Object）只有无参构造方法
 
-|              方法名               |                            说明                            |
-| :-------------------------------: | :--------------------------------------------------------: |
-|     public String toString()      | 返回对象的字符串表达形式。建议所有子类重写该方法，自动生成 |
-| public boolean equals(Object obj) | 比较对象是否相等，默认比较地址，重写可以比较内容，自动生成 |
+|               方法名                |                            说明                            |
+| :---------------------------------: | :--------------------------------------------------------: |
+|     `public String toString()`      | 返回对象的字符串表达形式。建议所有子类重写该方法，自动生成 |
+| `public boolean equals(Object obj)` | 比较对象是否相等，默认比较地址，重写可以比较内容，自动生成 |
 
 
 
@@ -1256,10 +1256,10 @@ for (int i = 0; i < arr.length - 1; i++)
 
 包含用于操作数组的各种方法
 
-|                 方法名                 |                 说明                 |
-| :------------------------------------: | :----------------------------------: |
-| public static String toString(int[] a) | 返回指定数组的内容的字符串表达形式。 |
-|    public static void sort(int[] a)    |      按照数字顺序排列指定的数组      |
+|                  方法名                  |                 说明                 |
+| :--------------------------------------: | :----------------------------------: |
+| `public static String toString(int[] a)` | 返回指定数组的内容的字符串表达形式。 |
+|    `public static void sort(int[] a)`    |      按照数字顺序排列指定的数组      |
 
 
 
@@ -1295,12 +1295,12 @@ for (int i = 0; i < arr.length - 1; i++)
 
 Integer：包装一个对象中的原始类型int的值
 
-|                 方法名                  |                 说明                  |
-| :-------------------------------------: | :-----------------------------------: |
-|        public Integer(int value)        |   根据int值创建Integer对象（过时）    |
-|        public Integer(String s)         |  根据String值创建Integer对象（过时）  |
-|  public static Integer valueOf(int i)   |   返回表示指定的int值得Integer实例    |
-| public static Integer valueOf(String s) | 返回一个保存指定值得Integer对象String |
+|                  方法名                   |                 说明                  |
+| :---------------------------------------: | :-----------------------------------: |
+|        `public Integer(int value)`        |   根据int值创建Integer对象（过时）    |
+|        `public Integer(String s)`         |  根据String值创建Integer对象（过时）  |
+|  `public static Integer valueOf(int i)`   |   返回表示指定的int值得Integer实例    |
+| `public static Integer valueOf(String s)` | 返回一个保存指定值得Integer对象String |
 
 ```java
 Integer i1 = Integer.valueOf(100);
@@ -1314,9 +1314,9 @@ Integer i2 = Integer.valueOf("100");
 基本类型包装类最常用的操作就是：用于基本数据类型和字符串类型之间的转化
 
 - int转换为String
-  - public static String **valueOf(int i)**：返回int参数得字符串表示形式。String类中的方法
+  - `public static String valueOf(int i)`：返回int参数得字符串表示形式。String类中的方法
 - String转换为int
-  - public static int **parseInt(String s)**：将字符串解析为int类型。Integer类中的方法
+  - `public static int parseInt(String s)`：将字符串解析为int类型。Integer类中的方法
 
 ```java
 //int → String

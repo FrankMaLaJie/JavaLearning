@@ -1,0 +1,5 @@
+001, malajie, 24, Dongguan
+002, dilireba, 28, Xinjiang
+003, pikachu, 5, Nintendo
+004, link, 100, Hyrule
+005, zelda, 100, Hyrule
