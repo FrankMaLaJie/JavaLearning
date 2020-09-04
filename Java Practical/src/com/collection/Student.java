@@ -8,10 +8,7 @@ public class Student
     private int age;
     private int chinese;
     private int math;
-
-    public Student()
-    {
-    }
+    private int english;
 
     public Student(String name, int age)
     {
@@ -19,12 +16,53 @@ public class Student
         this.age = age;
     }
 
-    public Student(String name, int age, int chinese, int math)
+    public Student()
+    {
+    }
+
+    public Student(String name, int age, int chinese, int math, int english)
     {
         this.name = name;
         this.age = age;
         this.chinese = chinese;
         this.math = math;
+        this.english = english;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        if (age != student.age) return false;
+        if (chinese != student.chinese) return false;
+        if (math != student.math) return false;
+        if (english != student.english) return false;
+        return name != null ? name.equals(student.name) : student.name == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + age;
+        result = 31 * result + chinese;
+        result = 31 * result + math;
+        result = 31 * result + english;
+        return result;
+    }
+
+    public int getEnglish()
+    {
+        return english;
+    }
+
+    public void setEnglish(int english)
+    {
+        this.english = english;
     }
 
     public String getName()
@@ -67,33 +105,9 @@ public class Student
         this.math = math;
     }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Student student = (Student) o;
-
-        if (age != student.age) return false;
-        if (chinese != student.chinese) return false;
-        if (math != student.math) return false;
-        return Objects.equals(name, student.name);
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + age;
-        result = 31 * result + chinese;
-        result = 31 * result + math;
-        return result;
-    }
-
     public int getSum()
     {
-        return this.getChinese() + this.getMath();
+        return this.getChinese() + this.getMath() + this.getEnglish();
     }
 
     public void show()
@@ -102,6 +116,7 @@ public class Student
                 (name + ", " + age + "岁" +
                         ", 语文 " + chinese + "分" +
                         ", 数学 " + math + "分" +
+                        ", 英语 " + english + "分" +
                         ", 总分 " + this.getSum() + "分");
     }
 }

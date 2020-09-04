@@ -539,7 +539,7 @@ public static void main(String[] args) throws IOException
 
 
 
-#### 字节流写数据的异常处理
+#### 字节流写数据的异常处理（finally关键字）
 
 - finally：在异常处理时，提供 **finally** 块来执行所有清楚操作，比如IO流中的释放资源
 
@@ -870,6 +870,305 @@ public static void main(String[] args) throws IOException
 ![image-20200903212024743](https://i.loli.net/2020/09/03/j3Ksti8fFMBHyha.png)
 
 
+
+### 异常处理
+
+用 `try...catch...finally` 的做法：
+
+```java
+try{
+    可能出现异常的代码;
+}
+catch(异常类名 变量名){
+    异常的处理代码;
+}
+finally{
+    执行所有清楚操作;
+}
+
+//JDK7优化方案
+//自动释放资源
+try(定义流对象){
+    可能出现异常的代码;
+}
+catch(异常类名 变量名){
+    异常的处理代码;
+}
+
+//JDK9优化方案
+//自动释放资源
+定义流对象
+try(输入流对象;输出流对象){
+    可能出现异常的代码;
+}
+catch(异常类名 变量名){
+    异常的处理代码;
+}
+```
+
+
+
+### 特殊操作流
+
+#### 标准输入输出流
+
+System类中有两个静态的成员变量：
+
+- `public static final InputStream in` ：标准输入流
+  - 通常，该流对应于 **键盘输入** 或由主机环境或用户指定的另一输入源。
+  - 自己实现键盘录入数据：
+    - `BufferedReader br = new BufferedReader(new InputStreamReader(System.in))`
+  - Java提供了一个类
+    - `Scanner sc = new Scanner(System.in)`
+- `public static final PrintStream out` ：标准输出流
+  - 通常，该流对应于主机环境或用户指定的 **显示输出** 或另一输出目的地。
+  - 本质是一个标准的输出流
+  - `PrintStream ps = System.out`
+  - `PrintStream ` 类有的方法，`System.out` 都可以使用
+
+
+
+### 打印流
+
+- 字节打印流：`PrintStream`
+- 字符打印流：`PrintWriter`
+- 特点：
+  - 只负责输出数据，不负责读取数据
+  - 有自己的特有方法
+  - `printStream(String fileName)`：使用指定的文件名创建新的打印流
+  - 使用继承父类的方法写数据，查看的时候会转码；使用自己特有的方法写数据，查看的数据原样输出
+
+
+
+#### 字节打印流
+
+```java
+public static void main(String[] args) throws IOException
+{
+    PrintStream ps = new PrintStream("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\ps.txt");
+
+    //字节输出流方法写数据
+    ps.write(97);//写入a
+    
+    //特有方法，不发生转码操作
+    ps.print(97);//写入97
+    ps.println();//换行
+
+    ps.close();
+}
+```
+
+
+
+#### 字符打印流
+
+##### 构造方法
+
+|                    方法名                    |                             说明                             |
+| :------------------------------------------: | :----------------------------------------------------------: |
+|        `PrintWriter(String filename)`        | 使用指定的文件名创建一个新的PrintWriter，而不需要自动执行刷新 |
+| `PrintWriter(Writer out, boolean autoFlush)` | 创建一个新的PrintWriter；<br />out：字符输出流；<br />autoFlush：布尔值；如果为真，则println, printf, 或 format方法将刷新输出缓冲区 |
+
+```java
+public static void main(String[] args) throws IOException
+{
+    PrintWriter pw = new PrintWriter("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\ps.txt");
+    
+    pw.write(97);
+    //写入后必须刷新才能看见
+    pw.flush();
+
+    pw.close();
+}
+
+//优化
+public static void main(String[] args) throws IOException
+{
+    //第二个参数是true，写入完成之后会自动刷新
+    PrintWriter pw = new PrintWriter(new FileWriter("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\ps.txt"), true);
+    
+    pw.write(97);
+
+    pw.close();
+}
+
+```
+
+
+
+### 对象序列化流
+
+- 将对象保存到磁盘中，或者在网络中传输对象
+- 使用一个字节序列表示一个对象，该字节序列包含：对象类型、对象数据和对象中存储的属性等信息
+- 字节序列写到文件之后，相当于文件中持久保存了一个对象的信息
+- 字节序列还可以从文件中被读取回来，重构对象，对它进行反序列化
+
+
+
+- 用对象序列化流序列化了一个对象后，如果我们修改了对象所属的类文件，读数据会不会出问题？
+  - 会出问题，抛出 InvalidClassException 异常
+
+- 如何解决这个问题？
+  - 给对象所属的类加一个序列化版本ID：`serialVersionUID`
+  - `private static final long serialVersionUID = 42L;`
+- 如果一个对象中的某个成员变量的值不想被序列化，如何实现？
+  - 给该成员变量添加`transient`关键字修饰，标记该成员变量不参加序列化过程
+  - `private transient int age;`
+
+
+
+#### 对象序列化流
+
+- `ObjectOutputStream`
+- 将Java对象的原始数据类型和图形写入OutputStream
+- 可以使用`ObjectInputStream`读取（重构）对象
+- 可以通过使用流的文件来完成对象的持久存储
+- 如果流是网络套接字流，则可以在另一个主机或另一个进程中重新构建对象
+
+##### 构造方法
+
+`ObjectOutputStream(OutputStream out)`：创建一个写入指定的`OutputStream `的`ObjectOutputStream `
+
+##### 序列化对象的方法
+
+`void WriteObject(Object obj)`：将指定对象写入`ObjectOutputStream `
+
+**注意：**
+
+- **一个对象想要被序列化，该对象所属的类必须实现`Serializable`接口**
+- **`Serializable`是一个标记接口，实现该接口，不需要重写任何方法**
+
+```java
+public static void write() throws IOException
+{
+    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("123"));
+    Student s= new Student();
+    oos.writeObject(s);
+    oos.close();
+}
+```
+
+
+
+#### 对象反序列化流
+
+- `ObjectInputStream`
+- `ObjectInputStream`反序列化现在使用`ObjectOutputStream`编写的原始数据和对象
+
+##### 构造方法
+
+`ObjectInputStream(InputStream in)`：创建一个从指定的`InputStream `读取的`ObjectOutputStream `
+
+##### 反序列化对象的方法
+
+`Object readObject()`：从`ObjectOutputStream `读取一个对象
+
+```java
+public static void read() throws IOException
+{
+    ObjectInputStream ois = new ObjectInputStream(new FileInputStream("123"));
+    Object obj = ois.readObject();
+    Student s = (Student)obj;
+    ois.close();
+}
+```
+
+
+
+### Properties
+
+#### 概述
+
+- Map体系的集合类
+- Properties可以保存到流中或者从流中加载
+- 创建集合的时候不用写泛型，默认Object类型
+
+```java
+public static void main(String[] args) throws IOException
+{
+    //创建集合对象
+    Properties prop = new Properties();//不用写泛型(类型)
+    
+    //存储元素
+    prop.put("123", "456");
+    prop.put("789", "123");
+    prop.put("456", "789");
+    
+    //遍历集合
+    Set<Object> keySet = prop.keySet();
+    for(Object key : keySet){
+        Object value = prop.get(key);
+    }
+}
+```
+
+
+
+#### 特有方法
+
+|                     方法名                     |                             说明                             |
+| :--------------------------------------------: | :----------------------------------------------------------: |
+| `Object setProperty(String key, String value)` |  设置集合的键和值，都是String类型，底层调用HashTable方法put  |
+|        `String getProperty(String key)`        |      使用此属性列表中指定的键搜索属性（得到键对应的值）      |
+|      `Set<String> stringPropertyNames()`       | 从该属性列表中返回一个不可修改的键集，其中键及其对应的值是字符串（得到键的集合） |
+
+```java
+public static void main(String[] args) throws IOException
+{
+    Properties prop = new Properties();
+
+    prop.setProperty("123", "456");
+    prop.setProperty("789", "123");
+    prop.setProperty("456", "789");
+
+    Set<String> names = prop.stringPropertyNames();
+
+    for (String key : names)
+    {
+        String value = prop.getProperty(key);
+        System.out.println(key + value);
+    }
+}
+```
+
+
+
+#### Properties和IO流结合的方法
+
+|                      方法名                      |                             说明                             |
+| :----------------------------------------------: | :----------------------------------------------------------: |
+|        `void load(InputStream inStream)`         |            从输入字节流读取属性列表（键和元素对）            |
+|          **`void load(Reader reader)`**          |            从输入字符流读取属性列表（键和元素对）            |
+| `void store(OutputStream out, String comments)`  | 将此属性列表（键和元素对）写入此Properties表中，以适合于使用` load(InputStream)`方法的格式写入输出字节流（comments：描述信息） |
+| **`void store(Writer writer, String comments)`** | 将此属性列表（键和元素对）写入此Properties表中，以适合于使用` load(Reader)`方法的格式写入输出字符流（comments：描述信息） |
+
+```java
+private static void myLoad() throws IOException
+{
+    Properties prop = new Properties();
+
+    FileReader fr = new FileReader("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\prop.txt");
+    prop.load(fr);
+    fr.close();
+
+    System.out.println(prop);
+}
+
+private static void myStore() throws IOException
+{
+    Properties prop = new Properties();
+
+    prop.setProperty("123", "456");
+    prop.setProperty("789", "123");
+    prop.setProperty("456", "789");
+
+    //void store(Writer writer, String comments)
+    FileWriter fw = new FileWriter("G:\\Github Desktop\\JavaLearning\\Java Practical\\src\\com\\prop.txt");
+    prop.store(fw, null);
+
+    fw.close();
+}
+```
 
 
 

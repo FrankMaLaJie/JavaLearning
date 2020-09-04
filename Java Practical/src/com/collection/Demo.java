@@ -134,13 +134,13 @@ public class Demo
             }
         });
 
-        Student s1 = new Student("迪",24,95,99);
-        Student s2 = new Student("丽",25,94,98);
-        Student s3 = new Student("热",26,93,97);
-        Student s4 = new Student("巴",27,92,96);
-        Student s5 = new Student("迪丽热巴",28,100,100);
-        Student s6 = new Student("ma",27,90,98);
-        Student s7 = new Student("la",27,90,98);
+        Student s1 = new Student("迪",24,95,99,100);
+        Student s2 = new Student("丽",25,94,98,100);
+        Student s3 = new Student("热",26,93,97,100);
+        Student s4 = new Student("巴",27,92,96,100);
+        Student s5 = new Student("迪丽热巴",28,100,100,100);
+        Student s6 = new Student("ma",27,90,98,100);
+        Student s7 = new Student("la",27,90,98,100);
 
 
         ts.add(s1);
