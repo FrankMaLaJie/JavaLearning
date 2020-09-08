@@ -781,7 +781,7 @@ public static void main(String[] args) throws IOException
 |             `void write(int c)`             |                          写一个字符                          |
 |          `void write(char[] cbuf)`          |                       写入一个字符数组                       |
 | `void write(char[] cbuf, int off, int len)` |                   写入一个字符数组的一部分                   |
-|           `void write(String str)           |                        写入一个字符串                        |
+|          `void write(String str)`           |                        写入一个字符串                        |
 | `void write(String str, int off, int len)`  |                    写入一个字符串的一部分                    |
 |               `void flush()`                |                   刷新流，还可以继续写数据                   |
 |               `void close()`                | 关闭流，释放资源，但是在关闭之前会先刷新流。一点关闭就不能再写数据 |
