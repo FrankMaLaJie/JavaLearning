@@ -4,6 +4,13 @@ public class Student
 {
     private String sid;
     private String name;
+
+    public Student(String name, String age)
+    {
+        this.name = name;
+        this.age = age;
+    }
+
     private String age;
     private String address;
 

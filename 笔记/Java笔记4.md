@@ -505,6 +505,480 @@ public static void receive() throws IOException
 
 
 
+# Lambda表达式
+
+## Lambda表达式的标准格式
+
+- 组成Lambda表达式的三要素
+  - 形式参数
+  - 箭头
+  - 代码块
+
+- 使用前提
+
+  - 有一个接口
+  - 接口中有且只有一个抽象方法
+  - 必须有上下文环境，才能推导出Lambda对应的接口
+    - 根据局部变量的赋值
+    - 根据调用方法的参数
+
+- 格式：
+
+  - `(形式参数)->{代码块}`
+  - 形式参数：如果有多个参数，参数之间用逗号隔开；如果没有参数，留空即可
+  - `->`：由英文中画线和大于符号组成，固定写法。代表指向动作
+  - 代码块：具体要做的事情，也就是之前写的方法体内容
+
+  ```java
+  //启动一个线程，输出：你好
+  public static void main(String[] args){
+      //实现类的方式实现需求
+      MyRunnable my = new MyRunnable();
+      Thread t = new Thread(my);
+      t.start();
+      
+      //匿名内部类的方式实现
+      new Thread(new Runnable()){
+          @Override
+          public void run(){
+              System.out.println("你好");
+          }
+      }.start();
+      
+      //Lambda表达式的方式改进
+      new thread(() -> {
+          System.out.println("你好");
+      }).start();
+      
+  }
+  ```
+
+
+
+## Lambda省略规则
+
+- 参数类型可以省略，但是有多个参数的情况下，不能只省略一个
+- 如果参数有且只有一个，小括号可以省略
+- 如果代码块语句只有一条，可以省略大括号和分号，甚至是return
+
+
+
+## Lambda表达式和匿名内部类的区别
+
+- 所需类型不同
+  - 匿名内部类：可以是接口、抽象类或具体类
+  - Lambda表达式：只能是接口
+- 使用限制不同
+  - 如果接口中有且只有一个抽象方法，两者都可以使用
+  - 如果接口中有多于一个抽象方法，只能使用匿名内部类，而不能使用Lambda表达式
+- 实现原理不同
+  - 匿名内部类：编译之后，产生一个单独的.class字节码文件
+  - Lambda表达式：编译只会，没有一个单独的.class字节码文件，对应的字节码会在运行时动态生成
+
+
+
+## 接口组成更新
+
+### 概述
+
+- 接口组成
+  - 常量：`public static final`
+  - 抽象方法：`public abstract`
+  - 默认方法（Java8）
+  - 静态方法（Java8）
+  - 私有方法（Java9）
+
+
+
+#### 默认方法
+
+- 格式：
+  - `public default 返回类型 方法名(参数列表){}`
+  - 范例：`public default void show(){}`
+
+- 注意事项：
+  - 默认方法不是抽象方法，不强制重写，但是可以被重写，重写时去掉`default`关键字
+  - `public`可以省略，`default`不能省略
+
+
+
+#### 静态方法
+
+- 格式：
+  - `public static 返回类型 方法名(参数列表){}`
+  - 范例：`public static void show(){}`
+
+- 注意事项：
+  - 静态方法只能通过接口名调用，不能通过实现类名或者对象名调用
+  - `public`可以省略，`static`不能省略
+
+
+
+#### 私有方法
+
+- 格式1：
+  - `private 返回类型 方法名(参数列表){}`
+  - 范例：`private void show(){}`
+
+- 格式2：
+  - `privat static 返回类型 方法名(参数列表){}`
+  - 范例：`private static void show(){}`
+
+- 注意事项：
+  - 默认方法可以调用私有的静态方法和非静态方法
+  - 静态方法只能调用私有的静态方法
+
+
+
+## 方法引用
+
+- 方法引用符
+  - `::`该符号为引用运算符，它所在的表达式被称为方法引用
+- Lambda表达式：`useEatable(s -> System.out.println(s));`
+  - 分析：拿到参数s之后通过Lambda表达式，传递给`System.out.println`方法去处理
+- 方法引用：`useEatable(System.out::println);`
+  - 分析：直接使用`System.out`中的`println`方法来取代Lambda，代码更加简洁
+- 如果使用Lambda，根据“可推到就是可省略“的原则，无需指定参数类型，也无需指定的重载形式，它们都将被自动推导
+- 如果使用方法引用，同样可以根据上下文进行推导
+- 方法引用时Lambda的孪生兄弟
+
+
+
+### Lambda表达式支持的方法引用
+
+- 常见的引用方式
+  - 引用类方法
+  - 引用对象的实例方法
+  - 引用类的实例方法
+  - 引用构造器
+
+
+
+#### 引用类方法
+
+- 引用类方法，就是引用类的静态方法
+  - 格式：`类名::静态方法`
+  - 范例：`Integer::parseInt`
+  - `Integer`类的方法：`public static int parseInt(String s)`，将此String转化为int
+  - Lambda表达式被类方法替代时，它的形参全部传递给静态方法作为参数
+
+```java
+public class ConverterDemo
+{
+    public static void main(String[] args)
+    {
+        useConverter(s -> Integer.parseInt(s));
+
+        useConverter(Integer::parseInt);
+    }
+
+    private static void useConverter(Converter c){
+        int num = c.convert("666");
+        System.out.println(num);
+    }
+}
+
+public interface Converter
+{
+    int convert(String s);
+}
+```
+
+
+
+#### 引用对象的实例方法
+
+- 引用对象的实例方法，就是引用类中的成员方法
+  - 格式：`类名::成员方法`
+  - 范例：`"HelloWorld"::toUpperCase`
+  - `String`类的方法：`public String toUpperCase()`，将此String所有字符转化为大写
+  - Lambda表达式被对象的实例方法替代时，它的形参全部传递给该方法作为参数
+
+```java
+public class PrintDemo
+{
+    public static void main(String[] args)
+    {
+        //Lambda表达式
+        usePrinter(s -> System.out.println(s.toUpperCase()));
+
+        //引用对象的实例方法
+        PrintString ps = new PrintString();
+        usePrinter(ps::printUpper);
+
+    }
+
+    private static void usePrinter(Printer p)
+    {
+        p.printUpperCase("HelloWorld");
+    }
+}
+
+public interface Printer
+{
+    void printUpperCase(String s);
+}
+
+public class PrintString
+{
+    public void printUpper(String s){
+        String result = s.toUpperCase();
+        System.out.println(result);
+    }
+}
+```
+
+
+
+#### 引用类的实例方法
+
+- 引用类方法，就是引用类中的成员方法
+  - 格式：`类名::成员方法`
+  - 范例：`String::substring`
+  - `String`类的方法：`public String substring(int beginIndex, int endIndex)`，从`beginInder`开始到`endIndex`结束，截取字符串，返回一个子串，子串长度为`endIndex` - `beginIndex`
+  - Lambda表达式被类的实例方法替代时：
+    - 它的第一个参数作为调用者
+    - 后面的参数全部传递给该方法作为参数
+
+```java
+public class MyStringDemo
+{
+    public static void main(String[] args)
+    {
+        useMyString((String s, int x, int y) ->
+                    {
+                        return s.substring(x, y);
+                    });
+
+        useMyString((s, x, y) -> s.substring(x, y));
+
+        useMyString(String::substring);
+
+    }
+
+    private static void useMyString(MyString my)
+    {
+        String s = my.mySubString("HelloWorld", 2, 5);
+        System.out.println(s);
+    }
+}
+
+public interface MyString
+{
+    String mySubString(String s, int beginIndex, int endIndex);
+}
+```
+
+
+
+#### 引用构造器
+
+- 引用构造器，就是引用构造方法
+  - 格式：`类名::new`
+  - 范例：`Student::new`
+  - Lambda表达式被构造器替代时，它的形参全部传递给该方法作为参数
+
+```java
+public class StudentDemo
+{
+    public static void main(String[] args)
+    {
+        useStudentBuilder((String name, String age)->{
+            return new Student(name, age);
+        });
+
+        useStudentBuilder((name, age)-> new Student(name, age));
+
+        useStudentBuilder(Student::new);
+
+    }
+
+    private static void useStudentBuilder(StudentBuilder sb){
+        Student s = sb.build("迪丽热巴", "28");
+        System.out.println(s.toString());
+    }
+}
+
+public interface StudentBuilder
+{
+    Student build(String name, String age);
+}
+```
+
+
+
+# 函数式接口
+
+## 概述
+
+- 有且只有一个抽象方法的接口
+- Java中函数式编程体现就是Lambda表达式，所有函数式接口就是适用于Lambda表达式的接口
+- 只有确保接口中有且只有一个抽象方法，Java中的Lambda才能顺利推导
+
+
+
+如何检测一个接口是不是函数式接口？
+
+- `@FunctionalInterface`：放在接口定义的上方，如果是，编译通过；如果不是编译失败
+- `@FunctionalInterface`可选，只要保证满足函数式接口定义的条件，也照样是函数式接口，**建议加上**
+
+
+
+### 函数式接口作为方法的参数
+
+- 如果方法的参数是一个函数式接口，我们可以用Lambda表达式作为参数传递
+  - `startThread(() -> System.out.println(Thread.currentThread().getName() + "线程启动"));`
+
+
+
+### 函数式接口作为方法的返回值
+
+- 如果方法的返回值是一个函数式接口，我们可以用Lambda表达式作为结果返回
+  - `private static Comparator<String> getComparator(){return (s1, s2)->s1.length() - s2.length();}`
+
+```java
+public class FunctionalInterfaceDemo
+{
+    public static void main(String[] args)
+    {
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("bbb");
+        arr.add("cc");
+        arr.add("aaaa");
+        arr.add("d");
+
+        System.out.println("排序前：" + arr);
+
+        Collections.sort(arr);
+        System.out.println("自然排序后：" + arr);
+
+        Collections.sort(arr, getComparator());
+        System.out.println("根据长度排序后：" + arr);
+    }
+
+    private static Comparator<String> getComparator(){
+        //return Comparator.comparingInt(String::length);
+        return (s1, s2)->s1.length() - s2.length();
+    }
+}
+```
+
+
+
+## 常用的函数式接口
+
+- Supplier接口
+- Consumer接口
+- Predicate接口
+- Function接口
+
+
+
+### Supplier接口
+
+- `Supplier<T>`：包含一个无参的方法
+  - `T get()`：获得结果
+  - 该方法不需要参数，它会按照某种实现逻辑（Lambda表达式实现）返回一个数据
+  - `Supplier<T>`也被称为生产型接口，如果我们制定了接口的泛型是什么类型，那么接口中的`get()`就会产生什么类型的数据供我们使用
+
+```java
+public static void getMaxSupplier()
+{
+    int[] arr = {15, 68, 96, 54, 25, 7, 86, 3, 12, 45, 68, 12};
+
+    int maxValue = getMax(() ->
+                          {
+                              int max = arr[0];
+                              for (int i = 0; i < arr.length; i++)
+                              {
+                                  if (arr[i] > max)
+                                  {
+                                      max = arr[i];
+                                  }
+                              }
+                              return max;
+                          });
+
+    System.out.println(maxValue);
+}
+
+private static int getMax(Supplier<Integer> sup)
+{
+    return sup.get();
+}
+```
+
+
+
+### Consumer接口
+
+`Consumer<T>`：包含两个方法
+
+- `void accept(T t)`：对给定的参数执行此操作
+- `default Counsumer<T> andThen(Consumer after)`：返回一个组合的`Consume`，一次执行此操作，然后执行`after`操作
+- 消费型接口，它消费的数据的数据类型由泛型指定
+
+```java
+//定义一个方法消费一个字符串
+public static void operatorStringConsumer()
+{
+    operatorString("迪丽热巴", s -> System.out.println(s));
+    operatorString("迪丽热巴", s -> System.out.println(new StringBuilder(s).reverse().toString()));
+
+    operatorString("迪丽热巴", s -> System.out.println(s), s -> System.out.println(new StringBuilder(s).reverse().toString()));
+}
+
+private static void operatorString(String name, Consumer<String> con1, Consumer<String> con2)
+{
+    //        con1.accept(name);
+    //        con2.accept(name);
+    con1.andThen(con2).accept(name);
+}
+
+private static void operatorString(String name, Consumer<String> con)
+{
+    con.accept(name);
+}
+
+
+//定义一个方法消费一个字符串两次
+public static void printInfoConsumer()
+{
+    String[] strArray = {"malajie,24", "pikachu,5"};
+    printInfo(strArray,
+              (String str) ->
+              {
+                  String name = str.split(",")[0];
+                  System.out.print("姓名：" + name);
+              },
+              (String str) ->
+              {
+                  int age = Integer.parseInt(str.split(",")[1]);
+                  System.out.println(",年龄：" + age);
+              });
+}
+
+private static void printInfo(String[] strArr, Consumer<String> con1, Consumer<String> con2)
+{
+    for (String s : strArr)
+    {
+        con1.andThen(con2).accept(s);
+    }
+}
+```
+
+
+
+### Predicate接口
+
+`Predicate<T>`：常用的4个方法
+
+- `boolean test(T t)`：对给定的参数进行判断（判断逻辑由Lambda表达式实现），返回一个布尔值
+- `default Predicate<T> and(Predicate other)`：返回一个组合判断，对应短路与
+- `default Predicate<T> or(Predicate other)`：返回一个组合判断，对应短路或
+- `default Predicate<T> negate()`：返回一个逻辑的否定，对应逻辑非
+- `Predicate<T>`接口通常用于判断参数是否满足指定的条件
+
 
 
 
