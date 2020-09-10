@@ -876,10 +876,11 @@ public class FunctionalInterfaceDemo
 
 ### Supplier接口
 
-- `Supplier<T>`：包含一个无参的方法
-  - `T get()`：获得结果
-  - 该方法不需要参数，它会按照某种实现逻辑（Lambda表达式实现）返回一个数据
-  - `Supplier<T>`也被称为生产型接口，如果我们制定了接口的泛型是什么类型，那么接口中的`get()`就会产生什么类型的数据供我们使用
+`Supplier<T>`：包含一个无参的方法
+
+- `T get()`：获得结果
+- 该方法不需要参数，它会按照某种实现逻辑（Lambda表达式实现）返回一个数据
+- `Supplier<T>`也被称为生产型接口，如果我们制定了接口的泛型是什么类型，那么接口中的`get()`就会产生什么类型的数据供我们使用
 
 ```java
 public static void getMaxSupplier()
@@ -979,7 +980,108 @@ private static void printInfo(String[] strArr, Consumer<String> con1, Consumer<S
 - `default Predicate<T> negate()`：返回一个逻辑的否定，对应逻辑非
 - `Predicate<T>`接口通常用于判断参数是否满足指定的条件
 
+```java
+//判断给定字符串是否满足要求
+public static void checkStringPredicate()
+{
+    //checkString1
+    System.out.println(checkString("hello", s -> s.length() > 8));
 
+    //checkString2
+    boolean b3 = checkString2("hello", s -> s.length() > 8, s -> s.length() < 15);
+    System.out.println(b3);
+
+    boolean b4 = checkString2("HelloWorld", s -> s.length() > 8, s -> s.length() < 15);
+    System.out.println(b4);
+}
+
+private static boolean checkString(String s, Predicate<String> pre)
+{
+    return pre.test(s);
+}
+
+//同一个字符串给出两个不同的判断条件，最后把这两个判断的结果做逻辑与运算的结果作为最终的结果
+private static boolean checkString2(String s, Predicate<String> pre1, Predicate<String> pre2)
+{
+    //        boolean b1 = pre1.test(s);
+    //        boolean b2 = pre2.test(s);
+    //        boolean b = b1 && b2;
+    //        return b;
+    return pre1.and(pre2).test(s);//b1 && b2
+    return pre1.or(pre2).test(s);//b1 || b2
+
+}
+
+//筛选满足条件的数据
+public static void myFilterPredicate()
+{
+    String[] strArr = {"柳岩，34", "林青霞，30", "张曼玉，35", "貂蝉，31", "王祖贤，33"};
+    ArrayList<String> arrayList = myFilter(strArr, s -> s.split("，")[0].length() > 2,
+                                           s -> Integer.parseInt(s.split("，")[1]) > 33);
+
+    for (String str : arrayList)
+    {
+        System.out.println(str);
+    }
+}
+
+
+private static ArrayList<String> myFilter(String[] strArr, Predicate<String> pre1, Predicate<String> pre2)
+{
+    ArrayList<String> arr = new ArrayList<>();
+
+    for (String s : strArr)
+    {
+        if (pre1.and(pre2).test(s))
+        {
+            arr.add(s);
+        }
+    }
+    return arr;
+}
+```
+
+
+
+### Function接口
+
+`Function<T, R>`：常用的2个方法
+
+- `R apply(T t)`：将此函数应用于给定的参数
+- `default <V> Function andThen(Function after)`：返回一个组合函数，首先将该函数应用于输入，然后将after函数应用于结果
+- `Function<T, R>`接口通常用于对参数进行处理，转换（处理逻辑由Lambda表达式实现），返回一个新的值
+
+```java
+//把一个字符串转换为int类型
+public static void convertFunction()
+{
+    convert("100", Integer::parseInt);
+    convert(200, i -> String.valueOf(i + 50));
+    convert("100", Integer::parseInt,i -> String.valueOf(i + 50));
+}
+
+private static void convert(String s, Function<String, Integer> fun)
+{
+    int i = fun.apply(s);
+    System.out.println(i);
+}
+
+//把一个int类型的数据加上一个整数后，转换为字符串输出
+private static void convert(int i, Function<Integer, String> fun)
+{
+    String s = fun.apply(i);
+    System.out.println(s);
+}
+
+//把一个字符串转换为int类型，加上一个整数后，转换为字符串输出
+private static void convert(String s, Function<String, Integer> fun1,Function<Integer, String> fun2)
+{
+    //        Integer i = fun1.apply(s);
+    //        String str = fun2.apply(i);
+    String str = fun1.andThen(fun2).apply(s);
+    System.out.println(str);
+}
+```
 
 
 

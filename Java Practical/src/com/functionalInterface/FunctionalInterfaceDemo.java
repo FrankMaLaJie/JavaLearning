@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class FunctionalInterfaceDemo
 {
     public static void main(String[] args)
     {
-        printInfoConsumer();
+        convertFunction();
     }
 
     public static void interfaceAsReturn()
@@ -99,15 +101,15 @@ public class FunctionalInterfaceDemo
         String[] strArray = {"malajie,24", "pikachu,5"};
         printInfo(strArray,
                 (String str) ->
-        {
-            String name = str.split(",")[0];
-            System.out.print("姓名：" + name);
-        },
+                {
+                    String name = str.split(",")[0];
+                    System.out.print("姓名：" + name);
+                },
                 (String str) ->
-        {
-            int age = Integer.parseInt(str.split(",")[1]);
-            System.out.println(",年龄：" + age);
-        });
+                {
+                    int age = Integer.parseInt(str.split(",")[1]);
+                    System.out.println(",年龄：" + age);
+                });
     }
 
     private static void printInfo(String[] strArr, Consumer<String> con1, Consumer<String> con2)
@@ -118,5 +120,90 @@ public class FunctionalInterfaceDemo
         }
     }
 
+    //判断给定字符串是否满足要求
+    public static void checkStringPredicate()
+    {
+        //checkString1
+        System.out.println(checkString("hello", s -> s.length() > 8));
+
+        //checkString2
+        boolean b3 = checkString2("hello", s -> s.length() > 8, s -> s.length() < 15);
+        System.out.println(b3);
+
+        boolean b4 = checkString2("HelloWorld", s -> s.length() > 8, s -> s.length() < 15);
+        System.out.println(b4);
+    }
+
+    private static boolean checkString(String s, Predicate<String> pre)
+    {
+        return pre.test(s);
+    }
+
+    //同一个字符串给出两个不同的判断条件，最后把这两个判断的结果做逻辑与运算的结果作为最终的结果
+    private static boolean checkString2(String s, Predicate<String> pre1, Predicate<String> pre2)
+    {
+//        boolean b1 = pre1.test(s);
+//        boolean b2 = pre2.test(s);
+//        boolean b = b1 && b2;
+//        return b;
+        return pre1.and(pre2).test(s);
+    }
+
+    //筛选满足条件的数据
+    public static void myFilterPredicate()
+    {
+        String[] strArr = {"柳岩，34", "林青霞，30", "张曼玉，35", "貂蝉，31", "王祖贤，33"};
+        ArrayList<String> arrayList = myFilter(strArr, s -> s.split("，")[0].length() > 2,
+                s -> Integer.parseInt(s.split("，")[1]) > 33);
+
+        for (String str : arrayList)
+        {
+            System.out.println(str);
+        }
+    }
+
+    private static ArrayList<String> myFilter(String[] strArr, Predicate<String> pre1, Predicate<String> pre2)
+    {
+        ArrayList<String> arr = new ArrayList<>();
+
+        for (String s : strArr)
+        {
+            if (pre1.and(pre2).test(s))
+            {
+                arr.add(s);
+            }
+        }
+        return arr;
+    }
+
+    //把一个字符串转换为int类型
+    public static void convertFunction()
+    {
+        convert("100", Integer::parseInt);
+        convert(200, i -> String.valueOf(i + 50));
+        convert("100", Integer::parseInt,i -> String.valueOf(i + 50));
+    }
+
+    private static void convert(String s, Function<String, Integer> fun)
+    {
+        int i = fun.apply(s);
+        System.out.println(i);
+    }
+
+    //把一个int类型的数据加上一个整数后，转换为字符串输出
+    private static void convert(int i, Function<Integer, String> fun)
+    {
+        String s = fun.apply(i);
+        System.out.println(s);
+    }
+
+    //把一个字符串转换为int类型，加上一个整数后，转换为字符串输出
+    private static void convert(String s, Function<String, Integer> fun1,Function<Integer, String> fun2)
+    {
+//        Integer i = fun1.apply(s);
+//        String str = fun2.apply(i);
+        String str = fun1.andThen(fun2).apply(s);
+        System.out.println(str);
+    }
 
 }
