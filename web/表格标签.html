@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格标签</title>
+</head>
+<body>
+
+<!--定义表格，边框，宽度，内容和单元格的距离，单元格之间的距离，背景色，对齐方式-->
+<table border="1" width="50%" cellpadding="0" cellspacing="0" bgcolor="gray" align="center">
+    <!--    定义行-->
+    <tr>
+        <!--定义表头单元格,编号单元格占两行-->
+        <th rowspan="2">编号</th>
+        <th>姓名</th>
+        <th>成绩</th>
+    </tr>
+
+    <tr>
+        <!--定义单元格-->
+        <td>小龙女</td>
+        <td>100</td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <!--杨过占两列-->
+        <td colspan="2">杨过</td>
+    </tr>
+
+</table>
+
+
+</body>
+</html>

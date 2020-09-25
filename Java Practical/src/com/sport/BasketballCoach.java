@@ -1,5 +1,7 @@
 package com.sport;
 
+import org.junit.Test;
+
 public class BasketballCoach extends Coach
 {
     public BasketballCoach()
@@ -22,4 +24,5 @@ public class BasketballCoach extends Coach
     {
         System.out.println("篮球教练，教投篮和运球");
     }
+
 }

@@ -1,0 +1,2 @@
+className=com.studentmanager.Student
+methodName=nihao

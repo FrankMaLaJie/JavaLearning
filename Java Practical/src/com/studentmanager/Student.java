@@ -76,4 +76,12 @@ public class Student
                 ", address='" + address + '\'' +
                 '}';
     }
+
+    private void haha(){
+        System.out.println("haha");
+    }
+
+    public void nihao(){
+        System.out.println("nihao");
+    }
 }

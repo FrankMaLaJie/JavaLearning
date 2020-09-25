@@ -12,7 +12,30 @@ public class Main
 {
     public static void main(String[] args) throws IOException
     {
+        video();
+    }
 
+    public static void video() throws IOException
+    {
+        BufferedReader br = new BufferedReader
+                (new FileReader("C:\\Users\\Frank\\Desktop\\ffmpeg-files.txt"));
+        BufferedWriter bw = new BufferedWriter
+                (new FileWriter("C:\\Users\\Frank\\Desktop\\ffmpeg-files(1).txt"));
+
+        String line;
+        while ((line = br.readLine()) != null)
+        {
+            String s = line.split(" ")[3];
+            StringBuilder sb = new StringBuilder(s);
+            sb.deleteCharAt(sb.length() - 1);
+            System.out.println(sb);
+
+            bw.write(sb.toString());
+            bw.newLine();
+            bw.flush();
+        }
+        bw.close();
+        br.close();
     }
 
     private static void myLoad() throws IOException
@@ -42,7 +65,8 @@ public class Main
     }
 
 
-    public static void uniqueProp(){
+    public static void uniqueProp()
+    {
         Properties prop = new Properties();
 
         prop.setProperty("123", "456");

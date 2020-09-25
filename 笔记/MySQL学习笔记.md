@@ -2,13 +2,24 @@
 
 ## 登录和退出MySQL服务器
 
-```shell
+```mysql
 # 登录MySQL
-$ mysql -u root -p123456
+1. mysql -u root -p123456
+2. mysql -hip -uroot -p连接目标的密码
+3. mysql --host=ip --user=root --password=连接目标的密码
 
 # 退出MySQL数据库服务器
-exit;
+1.exit;
+2.quit;
+# MySQL服务启动
+1.手动
+2.cmd-->services.msc 打开服务的窗口
+3.使用管理员打开cmd
+*net start mysql 启动mysql的服务
+*net stop mysql 关闭mysql服务
 ```
+
+
 
 ## 基本语法
 
