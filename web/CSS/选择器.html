@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择器</title>
+    <style>
+        #div1{
+            color: chocolate;
+        }
+
+        div{
+            color: brown;
+        }
+
+        .cls1{
+            color: darkblue;
+        }
+
+        div p{
+            color: darkgreen;
+        }
+
+        div > p{
+            border: 5px solid;
+        }
+
+        input[type="text"]{
+            border: 5px solid;
+        }
+
+        a:link{
+            color: pink;
+        }
+        a:hover{
+            color: green;
+        }
+        a:active{
+            color: yellow;
+        }
+        a:visited{
+            color: red;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<!--id选择器-->
+<div id="div1">传智播客</div>
+<!--元素选择器-->
+<div>黑马程序员</div>
+<!--类选择器-->
+<p class="cls1">船只大学</p>
+
+<!--子选择器-->
+<!--父选择器-->
+<div>
+    <p>
+        扩展选择器
+    </p>
+</div>
+
+<p>子选择器对比</p>
+<div>父选择器对比</div>
+
+<br>
+
+<input type="text">
+<input type="password">
+
+<br>
+
+<!--伪类选择器-->
+<a href="#">伪类选择器</a>
+
+
+
+</body>
+</html>

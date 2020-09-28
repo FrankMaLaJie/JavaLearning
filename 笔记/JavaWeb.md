@@ -116,6 +116,7 @@ Hyper Text Markup Language 超文本标记语言，是最基础的网页开发�
   - `<p>`：段落标签
   - `<br>`：换行标签
   - `<hr>`：展示一条水平线
+    
     - `color`：颜色
     - `width`：宽度
       - 数值：width='20' ,数值的单位，默认是 px(像素)
@@ -247,23 +248,31 @@ Hyper Text Markup Language 超文本标记语言，是最基础的网页开发�
   - `<footer>`：页脚
 - 表格标签：
   - `<table>`：定义表格
-    - `<width>`：宽度
-    - `<border>`：边框
-    - `<cellpadding>`：定义内容和单元格的距离
-    - `<cellspacing>`：定义单元格之间的距离，如果为0，则单元格的线会合为一条
-    - `<bgcolor>`：背景色
-    - `<align>`：对齐方式
+    - `width`：宽度
+    - `border`：边框
+    - `cellpadding`：定义内容和单元格的距离
+    - `cellspacing`：定义单元格之间的距离，如果为0，则单元格的线会合为一条
+    - `bgcolor`：背景色
+    - `align`：对齐方式
+    
   - `<tr>`：定义行
-    - `<bgcolor>`：背景色
-    - `<align>`：对齐方式
-  - `<td>`：定义单元格
-    - `<colspan>`：合并列
-    - `<rowspan>`：合并行
+    
+    - `bgcolor`：背景色
+    - `align`：对齐方式
+    
   - `<th>`：定义表头单元格
-    - `<caption>`：表格标题
-    - `<thead>`：表示表格的头部分
-    * `<tbody>`：表示表格的体部分
-    - `<tfoot>`：表示表格的脚部分
+
+    - `caption`：表格标题
+    - `thead`：表示表格的头部分
+
+    * `tbody`：表示表格的体部分
+
+    - `tfoot`：表示表格的脚部分
+
+  - `<td>`：定义单元格
+    
+    - `colspan`：合并列
+    - `rowspan`：合并行
 
 ```html
 <!--定义表格，边框，宽度，内容和单元格的距离，单元格之间的距离，背景色，对齐方式-->
@@ -295,9 +304,52 @@ Hyper Text Markup Language 超文本标记语言，是最基础的网页开发�
 </table>
 ```
 
+- 表单标签：
+  - 用于采集用户输入的数据的，用于和服务器进行交互
+  - 表单项中的数据要想被提交：必须指定其`name`属性
+  - `<form>`：用于定义表单的，可以定义一个范围，范围代表采集用户数据的范围
+    - `action`：指定提交数据的URL
+    - `method`：指定提交方式
+      - 分类：一共7种，2种比较常用
+        - get：
+          1. 请求参数会在地址栏中显示。会封装到请求行中（HTTP协议后讲解）
+          2. 请求参数大小是有限制的。
+          3. 不太安全。
+        - post：
+          1. 请求参数不会再地址栏中显示。会封装在请求体中（HTTP协议后讲解）
+          2. 请求参数的大小没有限制。
+          3. 较为安全。
+- 表单项标签：
+  - `<intput>`：可以通过`type`属性值，改变元素展示的样式
+    - `type`
+      - `text`：文本输入框，默认值
+        1. `placeholder`：指定输入框的提示信息，当输入框的内容发生变化，会自动清空提示信息（）
+      - `password`：密码输入框
+      - `radio`：单选框
+        1. 要想让多个单选框实现单选的效果，则多个单选框的name属性值必须一样
+        2. 一般会给每一个单选框提供value属性，指定其被选中后提交的值
+        3. checked属性，可以指定默认值
+      - `checkbox`：复选框
+        1. 一般会给每一个单选框提供value属性，指定其被选中后提交的值
+        2. `checked`：可以指定默认值
+      - `file`：文件选择框
+      - `hidden`：隐藏域，用于提交一些信息
+      - 按钮：
+        1. `submit`：提交按钮，提交表单
+        2. `button`：提交按钮，提交表单
+        3. `image`：提交按钮，提交表单
+           - `src`：指定图片路径
+  - `<label>`：指定输入项的文字描述信息
+    - `<label>`的`for`属性一般会和 `<input>` 的 `id`属性值对应。如果对应了，则点击`<label>`区域，会让`<input>`输入框获取焦点。
+  - `<select>`: 下拉列表
+    - `option`：子元素，指定列表项
+  - `<textarea>`：文本域
+    - `cols`：指定列数，每一行有多少个字符
+    - `rows`：默认多少行
 
 
-#### 案例
+
+#### 表格案例
 
 ![image-20200926013150222](https://i.loli.net/2020/09/26/a1XyHWcxYMAGQud.png)
 
@@ -357,6 +409,571 @@ Hyper Text Markup Language 超文本标记语言，是最基础的网页开发�
 
 </html>
 ```
+
+
+
+### 表单案例
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HTML注册页面</title>
+    </head>
+    <body>
+
+        <form action="#" method="post">
+            <table border="1" width="500" align="center">
+                <tr>
+                    <td><label for="username">用户名</label></td>
+                    <td><input type="text" name="username" id="username"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="password">密码</label></td>
+                    <td><input type="password" name="password" id="password"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="E-mail">E-mail</label></td>
+                    <td><input type="text" name="E-mail" id="E-mail"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="name">姓名</label></td>
+                    <td><input type="text" name="name" id="name"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="tel">手机</label></td>
+                    <td><input type="text" name="tel" id="tel"></td>
+                </tr>
+
+                <tr>
+                    <td><label>性别</label></td>
+                    <td><input type="radio" name="gender" value="male">男
+                        <input type="radio" name="gender" value="female">女
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="birthday">出生日期</label></td>
+                    <td><input type="date" name="birthdate" id="birthday"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="checkCode">验证码</label></td>
+                    <td><input type="text" name="checkCode" id="checkCode">
+                        <img src="../img注册/verify_code.jpg">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="注册"></td>
+                </tr>
+            </table>
+        </form>
+
+    </body>
+</html>
+```
+
+
+
+
+
+# CSS
+
+## 概述
+
+Cascading Style Sheets 层叠样式表
+
+- 层叠：多个样式可以作用在同一个html的元素上，同时生效
+- 功能强大
+- 将内容展示和样式控制分离
+  - 降低耦合度，解耦
+  - 让分工协作更容易
+  - 提高开发效率
+
+
+
+## CSS的使用
+
+### CSS与html结合方式
+
+- 内联样式
+  - 在标签内使用style属性指定css代码
+  - 如：`<div style="color:red;">hello css</div>`
+- 内部样式
+  - 在head标签内，定义style标签，style标签的标签体内容就是css代码
+
+```css
+<style>
+div{
+    color:blue;
+}
+
+</style>
+<div>hello css</div>
+```
+
+- 外部样式
+  - 定义css资源文件
+  - 在head标签内，定义link标签，引入外部的资源文件
+
+```css
+a.css文件：
+div{
+    color:green;
+}
+
+<!--导入方式1-->
+.html文件:
+<link rel="stylesheet" href="a.css">
+
+<!--导入方式2-->
+<style>
+	@import"a.css";
+</style>
+```
+
+
+
+### 语法
+
+- 格式：
+
+```css
+选择器 {
+    属性名1:属性值1;
+    属性名2:属性值2;
+    ...
+}
+```
+
+- 选择器：筛选具有相似特征的元素
+- 每一对属性需要使用`;`隔开，最后一对属性可以不加`;`
+
+
+
+### 选择器
+
+筛选具有相似特征的元素
+
+- 基础选择器
+  - id选择器：选择具体的id属性值的元素，建议在一个html页面中id值唯一（优先级最高）
+    - 语法：`#id属性值{}`
+  - 类选择器：选择具有相同的class属性值的元素
+    - 语法：`.class属性值{}`
+    - id选择器选择器优先级高于类选择器
+  - 元素选择器：选择具有相同标签名称的元素（优先级最低）
+    - 语法： `标签名称{}`
+    - 类选择器优先级高于元素选择器
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>选择器</title>
+        <style>
+            #div1{
+                color: chocolate;
+            }
+
+            div{
+                color: yellow;
+            }
+
+            .cls1{
+                color: deeppink;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="div1">传智播客</div>
+        <div>黑马程序员</div>
+
+        <p class=".cls1">船只大学</p>
+
+
+    </body>
+</html>
+```
+
+- 扩展选择器
+  - 选择所有元素
+    - 语法：` *{}`
+  - 并集选择器
+    - 语法：`选择器1,选择器2{}`
+  - 子选择器：筛选选择器1元素下的选择器2元素
+    - 语法：  `选择器1 选择器2{}`
+  - 父选择器：筛选选择器2的父元素选择器1
+    - 语法： ` 选择器1 > 选择器2{}`
+  - 属性选择器：选择元素名称，属性名=属性值的元素
+    - 语法：`元素名称[属性名="属性值"]{}`
+  - 伪类选择器：选择一些元素具有的状态
+    - 语法：`元素:状态{}`
+    -  例如`<a>`状态：
+         * `link`：初始化的状态
+         * `visited`：被访问过的状态
+         * `active`：正在访问状态
+      			* `hover`：鼠标悬浮状态
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>选择器</title>
+        <style>
+            #div1{
+                color: chocolate;
+            }
+
+            div{
+                color: brown;
+            }
+
+            .cls1{
+                color: darkblue;
+            }
+
+            div p{
+                color: darkgreen;
+            }
+
+            div > p{
+                border: 5px solid;
+            }
+
+            input[type="text"]{
+                border: 5px solid;
+            }
+
+            a:link{
+                color: pink;
+            }
+            a:hover{
+                color: green;
+            }
+            a:active{
+                color: yellow;
+            }
+            a:visited{
+                color: red;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!--id选择器-->
+        <div id="div1">传智播客</div>
+        <!--元素选择器-->
+        <div>黑马程序员</div>
+        <!--类选择器-->
+        <p class="cls1">船只大学</p>
+
+        <!--子选择器-->
+        <!--父选择器-->
+        <div>
+            <p>
+                扩展选择器
+            </p>
+        </div>
+
+        <p>子选择器对比</p>
+        <div>父选择器对比</div>
+
+        <br>
+
+        <input type="text">
+        <input type="password">
+
+        <br>
+
+        <!--伪类选择器-->
+        <a href="#">伪类选择器</a>
+
+    </body>
+</html>
+```
+
+
+
+### 属性
+
+- 字体、文本
+    * `font-size`：字体大小
+   * `color`：文本颜色
+  * `text-align`：对其方式
+  * `line-height`：行高 
+- 背景
+  -  `background`：
+- 边框
+  - `border`：设置边框，符合属性
+- 尺寸
+  - `width`：宽度
+  - `height`：高度
+- 盒子模型：控制布局
+  - `margin`：外边距
+  - `padding`：内边距
+    - 默认情况下内边距会影响整个盒子的大小
+  - `box-sizing: border-box;`  设置盒子的属性，让width和height就是最终盒子的大小
+- float：浮动
+  - left
+  - right
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>属性</title>
+
+        <style>
+            p{
+                /*font*/
+                font-size: 50px;
+                color: red;
+                text-align: center;
+                line-height: 200px;
+
+                /*border*/
+                border: 2px solid darkgreen;
+            }
+
+            .div3{
+                border: 1px solid red;
+                /*尺寸*/
+                height: 300px;
+                width: 300px;
+                /*背景*/
+                background: url("../image旅游网/jiangwai_1.jpg") no-repeat center;
+            }
+
+            div{
+                border: 1px solid red;
+            }
+            .div1{
+                width: 100px;
+                height: 100px;
+                margin: 50px;
+            }
+            .div2{
+                width: 200px;
+                height: 200px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <p>传智播客</p>
+        <div class="div3"></div>
+
+        <br>
+
+        <div class="div2">
+            <div class="div1">
+
+            </div>
+        </div>
+
+    </body>
+</html>
+```
+
+
+
+### 案例
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS注册页面</title>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: url("../img注册/register_bg.png") no-repeat center;
+                padding-top: 25px;
+            }
+
+            .rg_layout {
+                width: 900px;
+                height: 500px;
+                border: 8px solid #EEEEEE;
+                background-color: white;
+                /*让div水平居中*/
+                margin: auto;
+            }
+
+            .rg_left {
+                /*border: 1px solid red;*/
+                float: left;
+                margin: 15px;
+            }
+            .rg_left > p:first-child{
+                color: #FFD026;
+                font-size: 20px;
+            }
+            .rg_left > p:last-child {
+                color: #A6A6A6;
+                font-size: 20px;
+            }
+
+            .rg_center {
+                /*border: 1px solid red;*/
+                float: left;
+            }
+
+            .rg_right {
+                /*border: 1px solid red;*/
+                float: right;
+                margin: 15px;
+            }
+            .rg_right > p:first-child{
+                font-size: 15px;
+            }
+            .rg_right p a{
+                color: pink;
+            }
+
+            .td_left{
+                width: 100px;
+                text-align: right;
+                height: 45px;
+            }
+            .td_right{
+                padding-left: 50px;
+            }
+            #username,#password,#email,#name,#birthday,#tel,#checkcode
+            {
+                width: 251px;
+                height: 32px;
+                border: 1px solid #A6A6A6;
+                /*设置边框圆角*/
+                border-radius: 5px;
+                padding-left: 10px;
+            }
+            #checkcode{
+                width: 110px;
+            }
+            #img_check{
+                height: 32px;
+                vertical-align: middle;
+            }
+            #btn_sub{
+                width: 150px;
+                height: 40px;
+                background-color: #FFD026;
+                border: 1px solid #FFD026;
+            }
+
+
+        </style>
+    </head>
+    <body>
+
+        <div class="rg_layout">
+            <div class="rg_left">
+                <p>
+                    新用户注册
+                </p>
+
+                <p>
+                    USER REGISTER
+                </p>
+
+            </div>
+
+            <div class="rg_center">
+                <div class="form">
+                    <form action="#" method="post">
+                        <table>
+                            <tr>
+                                <td class="td_left"><label for="username">用户名</label></td>
+                                <td class="td_right"><input type="text" name="username" id="username" placeholder="请输入用户名"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="td_left"><label for="password">密码</label></td>
+                                <td class="td_right"><input type="password" name="password" id="password" placeholder="请输入密码"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="td_left"><label for="email">Email</label></td>
+                                <td class="td_right"><input type="email" name="email" id="email" placeholder="请输入邮箱"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="td_left"><label for="name">姓名</label></td>
+                                <td class="td_right"><input type="text" name="name" id="name" placeholder="请输入姓名"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="td_left"><label for="tel">手机号</label></td>
+                                <td class="td_right"><input type="text" name="tel" id="tel" placeholder="请输入手机号"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="td_left"><label>性别</label></td>
+                                <td class="td_right">
+                                    <input type="radio" name="gender" value="male"> 男
+                                    <input type="radio" name="gender" value="female"> 女
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td_left"><label for="birthday">出生日期</label></td>
+                                <td class="td_right"><input type="date" name="birthday" id="birthday" placeholder="请输入出生日期"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="td_left"><label for="checkcode" >验证码</label></td>
+                                <td class="td_right"><input type="text" name="checkcode" id="checkcode" placeholder="请输入验证码">
+                                    <img id="img_check" src="../img注册/verify_code.jpg" alt="">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" id="btn_sub" align="center"><input type="submit" value="注册"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="rg_right">
+
+                <p>
+                    已有账号?
+                    <a href="#">立即登陆</a>
+                </p>
+
+            </div>
+        </div>
+
+    </body>
+</html>
+```
+
+
+
+
 
 
 

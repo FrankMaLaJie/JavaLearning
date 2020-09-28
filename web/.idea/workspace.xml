@@ -57,22 +57,29 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/案例" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Github Desktop\JavaLearning\web" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Github Desktop\JavaLearning\web" />
+      <recent name="G:\Github Desktop\JavaLearning\web\案例" />
+      <recent name="G:\Github Desktop\JavaLearning\web\标签" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -89,6 +96,9 @@
       <workItem from="1601021830880" duration="5543000" />
       <workItem from="1601043783157" duration="1022000" />
       <workItem from="1601051712112" duration="2896000" />
+      <workItem from="1601102219221" duration="7467000" />
+      <workItem from="1601304217008" duration="1602000" />
+      <workItem from="1601305838757" duration="7930000" />
     </task>
     <servers />
   </component>
@@ -108,13 +118,29 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="476" y="503" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601304497019">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="476" y="503" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.155.1920.1040@0.0.2560.1400" timestamp="1601304497019" />
     <state x="365" y="381" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1601022061360">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="365" y="381" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.2560.1400/2560.155.1920.1040@0.0.2560.1400" timestamp="1601022061360" />
-    <state x="141" y="347" key="SettingsEditor" timestamp="1601024436968">
+    <state x="141" y="347" key="SettingsEditor" timestamp="1601304696982">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="141" y="347" key="SettingsEditor/0.0.2560.1400/2560.155.1920.1040@0.0.2560.1400" timestamp="1601024436968" />
+    <state x="141" y="347" key="SettingsEditor/0.0.2560.1400/2560.155.1920.1040@0.0.2560.1400" timestamp="1601304696982" />
+    <state x="361" y="448" width="540" height="524" key="StructurePopup" timestamp="1601304702473">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="361" y="448" width="540" height="524" key="StructurePopup/0.0.2560.1400/2560.155.1920.1040@0.0.2560.1400" timestamp="1601304702473" />
+    <state x="296" y="334" key="run.anything.popup" timestamp="1601304579975">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="296" y="334" key="run.anything.popup/0.0.2560.1400/2560.155.1920.1040@0.0.2560.1400" timestamp="1601304579975" />
+    <state x="310" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1601109566828">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="310" y="320" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.155.1920.1040@0.0.2560.1400" timestamp="1601109566828" />
   </component>
 </project>
